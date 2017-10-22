@@ -24,6 +24,7 @@ Product.add({
   mission: { type: Types.Html, wysiwyg: true, height: 100 },
   brief: { type: Types.Html, wysiwyg: true, height: 300 },
   downloads: { type: Types.Relationship, ref: 'ProductDownload', many: true },
+  distros: { type: Types.Relationship, ref: 'ProductDistro', many: true },
   features: { type: Types.Relationship, ref: 'ProductFeature', many: true }
 })
 
