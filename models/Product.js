@@ -23,7 +23,8 @@ Product.add({
   image2x: { type: Types.CloudinaryImage },
   mission: { type: Types.Html, wysiwyg: true, height: 100 },
   brief: { type: Types.Html, wysiwyg: true, height: 300 },
-  downloads: { type: Types.Relationship, ref: 'ProductDownload', many: true }
+  downloads: { type: Types.Relationship, ref: 'ProductDownload', many: true },
+  features: { type: Types.Relationship, ref: 'ProductFeature', many: true }
 })
 
 Product.register()

@@ -71,7 +71,7 @@ exports = module.exports = function (app) {
     },
     Product: {
       methods: ['list', 'retrieve'],
-      populate: ['downloads'],
+      populate: ['downloads', 'features'],
     },
     Statistic: {
       methods: ['list', 'retrieve']
