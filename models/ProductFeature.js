@@ -13,6 +13,6 @@ ProductDownload.add({
   image2x: { type: Types.CloudinaryImage }
 })
 
-ProductDownload.relationship({ ref: 'Product', path: 'product', refPath: 'downloads' })
+ProductDownload.relationship({ ref: 'Product', path: 'product', refPath: 'features' })
 
 ProductDownload.register()

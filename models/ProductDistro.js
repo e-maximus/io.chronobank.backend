@@ -9,7 +9,7 @@ const ProductDistro = new keystone.List('ProductDistro', {
 ProductDistro.add({
   name: { type: String, required: true },
   title: { type: String },
-  stereotype: { type: Types.Select, options: [
+  type: { type: Types.Select, options: [
     { value: 'desktop', label: 'Desktop' },
     { value: 'mobile', label: 'Mobile' }
   ]},

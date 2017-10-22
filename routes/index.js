@@ -27,6 +27,8 @@ exports = module.exports = function (app) {
         'slug': req.params.slug
       })
       .populate('downloads')
+      .populate('distros')
+      .populate('features')
       .exec()
     res.send(product)
   })

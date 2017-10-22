@@ -10,7 +10,8 @@ Header.add({
   title: { type: String, required: true },
   stereotype: { type: Types.Select, options: [
     { value: 'default', label: 'Default' },
-    { value: 'splash', label: 'Splash' }
+    { value: 'splash', label: 'Splash' },
+    { value: 'product', label: 'Product' }
   ]},
   background: { type: Types.Select, options: [
     { value: 'dark', label: 'Dark' },
