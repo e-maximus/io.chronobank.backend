@@ -12,20 +12,11 @@ var keystone = require('keystone')
 keystone.init({
   'name': 'backend.chronobank.io',
   'brand': 'backend.chronobank.io',
+  'mongo': process.env.MONGO_URI || "mongodb://localhost:27017/backend-chronobank-io",
 
   'sass': 'public',
   'static': 'public',
   'favicon': 'public/favicon.ico',
-  // 'views': 'templates/views',
-  // 'view engine': '.hbs',
-
-  // 'custom engine': handlebars.create({
-  //   layoutsDir: 'templates/views/layouts',
-  //   partialsDir: 'templates/views/partials',
-  //   defaultLayout: 'default',
-  //   helpers: new require('./templates/views/helpers')(),
-  //   extname: '.hbs',
-  // }).engine,
 
   'auto update': true,
   'session': true,
