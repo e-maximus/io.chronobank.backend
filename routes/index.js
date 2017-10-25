@@ -58,8 +58,18 @@ exports = module.exports = function (app) {
     Feature: {
       methods: ['list', 'retrieve']
     },
+    FAQTopic: {
+      methods: ['list', 'retrieve'],
+      populate: ['questions'],
+    },
     Job: {
       methods: ['list', 'retrieve']
+    },
+    Header: {
+      methods: ['list', 'retrieve'],
+    },
+    Iteration: {
+      methods: ['list', 'retrieve'],
     },
     Member: {
       methods: ['list', 'retrieve']
@@ -78,16 +88,10 @@ exports = module.exports = function (app) {
     Statistic: {
       methods: ['list', 'retrieve']
     },
-    Header: {
-      methods: ['list', 'retrieve'],
-    },
     Story: {
       methods: ['list', 'retrieve'],
     },
     Testimonial: {
-      methods: ['list', 'retrieve'],
-    },
-    Iteration: {
       methods: ['list', 'retrieve'],
     }
   }).start()
