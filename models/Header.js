@@ -11,7 +11,8 @@ Header.add({
   stereotype: { type: Types.Select, options: [
     { value: 'default', label: 'Default' },
     { value: 'splash', label: 'Splash' },
-    { value: 'product', label: 'Product' }
+    { value: 'product', label: 'Product' },
+    { value: 'text', label: 'Text' }
   ]},
   background: { type: Types.Select, options: [
     { value: 'dark', label: 'Dark' },
