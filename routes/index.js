@@ -58,7 +58,7 @@ exports = module.exports = function (app) {
     Feature: {
       methods: ['list', 'retrieve']
     },
-    FAQTopic: {
+    FaqTopic: {
       methods: ['list', 'retrieve'],
       populate: ['questions'],
     },

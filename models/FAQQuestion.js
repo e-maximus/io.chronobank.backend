@@ -1,18 +1,18 @@
 const keystone = require('keystone')
 const Types = keystone.Field.Types
 
-const FAQQuestion = new keystone.List('FAQQuestion', {
+const FaqQuestion = new keystone.List('FaqQuestion', {
   map: { name: 'name' },
   autokey: { path: 'slug', from: 'name', unique: true }
 })
 
-FAQQuestion.add({
+FaqQuestion.add({
   name: { type: String, required: true },
   title: { type: String },
-  topic: { type: Types.Relationship, ref: 'FAQTopic' },
+  topic: { type: Types.Relationship, ref: 'FaqTopic' },
   brief: { type: Types.Html, wysiwyg: true, height: 350 },
 })
 
-FAQQuestion.relationship({ ref: 'FAQTopic', path: 'topic', refPath: 'questions' })
+FaqQuestion.relationship({ ref: 'FaqTopic', path: 'topic', refPath: 'questions' })
 
-FAQQuestion.register()
+FaqQuestion.register()
