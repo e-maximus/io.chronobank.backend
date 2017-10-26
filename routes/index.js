@@ -7,6 +7,7 @@ const restful = require('restful-keystone')(keystone, {
 const Product = keystone.list('Product')
 const Header = keystone.list('Header')
 const Story = keystone.list('Story')
+const FaqQuestion = keystone.list('FaqQuestion')
 
 // Common Middleware
 keystone.pre('routes', middleware.initLocals)
@@ -49,6 +50,12 @@ exports = module.exports = function (app) {
       })
       .exec()
     res.send(product)
+  })
+
+  // eslint-disable-next-line
+  app.get('/api/v1/faq-questions/search', async (req, res) => {
+    const page = await FaqQuestion.model.search(req.query)
+    res.send(page)
   })
 
   restful.expose({
