@@ -1,5 +1,5 @@
 const keystone = require('keystone')
-const Types = keystone.Field.Types
+// const Types = keystone.Field.Types
 
 const FaqTopic = new keystone.List('FaqTopic', {
   map: { name: 'name' },
@@ -11,6 +11,13 @@ FaqTopic.add({
   title: { type: String }
 })
 
-FaqTopic.relationship({ path: 'questions', ref: 'FaqQuestion', refPath: 'topic' });
+FaqTopic.schema.virtual('questions', {
+  ref: 'FaqQuestion',
+  localField: '_id',
+  foreignField: 'topic',
+  justOne: false
+})
+
+FaqTopic.relationship({ path: 'questions', ref: 'FaqQuestion', refPath: 'topic' })
 
 FaqTopic.register()

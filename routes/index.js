@@ -7,7 +7,10 @@ const restful = require('restful-keystone')(keystone, {
 const Product = keystone.list('Product')
 const Header = keystone.list('Header')
 const Story = keystone.list('Story')
+const FaqTopic = keystone.list('FaqTopic')
 const FaqQuestion = keystone.list('FaqQuestion')
+
+const FaqQuestionIndex = require('../index/FaqQuestionIndex')
 
 // Common Middleware
 keystone.pre('routes', middleware.initLocals)
@@ -58,16 +61,29 @@ exports = module.exports = function (app) {
     res.send(page)
   })
 
+  app.get('/api/v1/faq-questions/reindex', async (req, res) => {
+    await FaqQuestionIndex.clearIndex()
+    await FaqQuestionIndex.saveIndex(await FaqQuestion.model.find().exec())
+    res.send('OK')
+  })
+
+  app.get('/api/v1/faq-topics', async (req, res) => {
+    const topics = await FaqTopic.model
+      .find()
+      .populate('questions')
+      .exec()
+    res.send(topics.map(topic => ({
+      ...topic.toJSON(),
+      questions: [...topic.questions]
+    })))
+  })
+
   restful.expose({
     Article: {
       methods: ['list', 'retrieve']
     },
     Feature: {
       methods: ['list', 'retrieve']
-    },
-    FaqTopic: {
-      methods: ['list', 'retrieve'],
-      populate: ['questions'],
     },
     Job: {
       methods: ['list', 'retrieve']
