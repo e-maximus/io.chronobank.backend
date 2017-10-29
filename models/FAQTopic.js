@@ -12,4 +12,6 @@ FaqTopic.add({
   questions: { type: Types.Relationship, ref: 'FaqQuestion', many: true }
 })
 
+FaqTopic.relationship({ path: 'questions', ref: 'FaqQuestion', refPath: 'topic' });
+
 FaqTopic.register()
