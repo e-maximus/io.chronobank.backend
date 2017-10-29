@@ -15,8 +15,6 @@ FaqQuestion.add({
   brief: { type: Types.Html, wysiwyg: true, height: 350 },
 })
 
-FaqQuestion.relationship({ ref: 'FaqTopic', path: 'topic', refPath: 'questions' })
-
 FaqQuestion.defaultColumns = 'name|20%, title, topic|20%'
 
 const solr = axios.create({
@@ -28,6 +26,7 @@ FaqQuestion.schema.post('save', async (d) => {
     const { data } = await solr.post('update?commitWithin=1000&overwrite=true', [
       {
         id: `FaqQuestion:${d._id}`,
+        topic_s: d.topic,
         title_txt_en: d.title,
         brief_txt_en: sanitizeHtml(d.brief, {
           allowedTags: [],
@@ -56,17 +55,25 @@ FaqQuestion.schema.post('remove', async (d) => {
   }
 })
 
-FaqQuestion.schema.statics.search = async ({ query = '*', offset = 0, limit = 10 } = { query: '*', offset: 0, limit: 10}) => {
+FaqQuestion.schema.statics.search = async (
+  { query = '*', topic = null, offset = 0, limit = 10 } =
+  { query: '*', topic: null, offset: 0, limit: 10}
+) => {
   const pattern = /([\!\*\+\-\=\<\>\&\|\(\)\[\]\{\}\^\~\?\:\"])/g
+  const params = {
+    defType: 'edismax',
+    q: query.replace(pattern, "\\$1"),
+    fq: !topic
+      ? null
+      : (Array.isArray(topic) ? topic : [ topic ]).map(c => `(topic_s:${c})`).join(' OR '),
+    qf: 'title_txt_en^3 brief_txt_en^2',
+    fl: '*,score',
+    start: offset,
+    rows: limit
+  }
+  console.log(params)
   const { data } = await solr.get('select', {
-    params: {
-      defType: 'edismax',
-      q: query.replace(pattern, "\\$1"),
-      qf: 'title_txt_en^3 brief_txt_en^2',
-      fl: '*,score',
-      start: offset,
-      rows: limit
-    }
+    params
   })
   try {
     const { response } = data

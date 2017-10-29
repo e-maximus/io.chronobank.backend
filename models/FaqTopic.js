@@ -8,8 +8,7 @@ const FaqTopic = new keystone.List('FaqTopic', {
 
 FaqTopic.add({
   name: { type: String, required: true },
-  title: { type: String },
-  questions: { type: Types.Relationship, ref: 'FaqQuestion', many: true }
+  title: { type: String }
 })
 
 FaqTopic.relationship({ path: 'questions', ref: 'FaqQuestion', refPath: 'topic' });
