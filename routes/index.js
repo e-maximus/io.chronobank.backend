@@ -22,6 +22,10 @@ exports = module.exports = function (app) {
 
   app.all('/api/v1/*', keystone.middleware.cors)
 
+  app.options('/api/v1/*', (req, res) => {
+    res.send(200)
+  })
+
   app.get('/', (req, res) => {
     res.redirect('/keystone/')
   })
