@@ -28,13 +28,13 @@ exports = module.exports = function (app) {
     res.status(500).send('error', { error: err })
   }
 
-  app.use(errorHandler)
-
   app.all('/api/v1/*', keystone.middleware.cors)
 
   app.options('/api/v1/*', (req, res) => {
     res.send(200)
   })
+
+  app.use(errorHandler)
 
   app.get('/', (req, res) => {
     res.redirect('/keystone/')
