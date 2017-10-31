@@ -5,6 +5,7 @@ const restful = require('restful-keystone')(keystone, {
 })
 
 const Product = keystone.list('Product')
+const Enquiry = keystone.list('Enquiry')
 const Header = keystone.list('Header')
 const Story = keystone.list('Story')
 const FaqTopic = keystone.list('FaqTopic')
@@ -65,6 +66,18 @@ exports = module.exports = function (app) {
     await FaqQuestionIndex.clearIndex()
     await FaqQuestionIndex.saveIndex(await FaqQuestion.model.find().exec())
     res.send('OK')
+  })
+
+  app.post('/api/v1/enquiries', async (req, res) => {
+    const body = req.body
+    const persisted = Enquiry.model.create({
+      name: body.name,
+      email: body.email,
+      phone: body.phone,
+      enquiryType: 'message',
+      message: body.message
+    }).save()
+    res.send(persisted)
   })
 
   app.get('/api/v1/faq-topics', async (req, res) => {
