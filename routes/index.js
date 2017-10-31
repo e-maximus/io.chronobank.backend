@@ -6,6 +6,7 @@ const restful = require('restful-keystone')(keystone, {
 
 const Product = keystone.list('Product')
 const Enquiry = keystone.list('Enquiry')
+const Application = keystone.list('Application')
 const Subscription = keystone.list('Subscription')
 const Header = keystone.list('Header')
 const Story = keystone.list('Story')
@@ -75,7 +76,7 @@ exports = module.exports = function (app) {
 
   app.post('/api/v1/enquiries', async (req, res) => {
     const body = req.body
-    const persisted = Enquiry.model.create({
+    const persisted = await Enquiry.model.create({
       name: body.name,
       email: body.email,
       phone: body.phone,
@@ -87,7 +88,7 @@ exports = module.exports = function (app) {
 
   app.post('/api/v1/subscriptions', async (req, res) => {
     const body = req.body
-    const persisted = Subscription.model.create({
+    const persisted = await Subscription.model.create({
       email: body.email
     })
     res.send(persisted)
@@ -95,7 +96,7 @@ exports = module.exports = function (app) {
 
   app.post('/api/v1/applications', async (req, res) => {
     const body = req.body
-    const persisted = Enquiry.model.create({
+    const persisted = await Application.model.create({
       name: body.name,
       email: body.email,
       phone: body.phone,
