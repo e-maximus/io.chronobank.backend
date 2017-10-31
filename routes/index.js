@@ -22,6 +22,13 @@ keystone.pre('render', middleware.flashMessages)
 // Setup Route Bindings
 exports = module.exports = function (app) {
 
+  function errorHandler (err, req, res) {
+    res.status(500)
+    res.render('error', { error: err })
+  }
+
+  app.use(errorHandler)
+
   app.all('/api/v1/*', keystone.middleware.cors)
 
   app.options('/api/v1/*', (req, res) => {
