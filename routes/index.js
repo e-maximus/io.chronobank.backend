@@ -23,8 +23,9 @@ keystone.pre('render', middleware.flashMessages)
 exports = module.exports = function (app) {
 
   function errorHandler (err, req, res) {
-    res.status(500)
-    res.render('error', { error: err })
+    // eslint-disable-next-line
+    console.log(err)
+    res.status(500).send('error', { error: err })
   }
 
   app.use(errorHandler)
