@@ -12,4 +12,6 @@ Job.add({
   details: { type: Types.Html, wysiwyg: true, height: 250 }
 })
 
+Job.relationship({ path: 'applications', ref: 'Application', refPath: 'job' })
+
 Job.register()

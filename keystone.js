@@ -51,7 +51,7 @@ keystone.set('nav', {
   media: ['posts', 'post-categories', 'articles', 'galleries'],
   references: ['testimonials', 'partners', 'members', 'jobs'],
   // galleries: 'galleries',
-  enquiries: 'enquiries',
+  enquiries: ['enquiries', 'applications', 'subscriptions'],
   users: 'users',
 })
 
