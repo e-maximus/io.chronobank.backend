@@ -22,19 +22,20 @@ keystone.pre('render', middleware.flashMessages)
 // Setup Route Bindings
 exports = module.exports = function (app) {
 
-  function errorHandler (err, req, res) {
+  // eslint-disable-next-line
+  function errorHandler (err, req, res, next) { // Forced to have 4 arguments due to express convension about error handlers
     // eslint-disable-next-line
     console.log(err)
     res.status(500).send('error', { error: err })
   }
+
+  app.use(errorHandler)
 
   app.all('/api/v1/*', keystone.middleware.cors)
 
   app.options('/api/v1/*', (req, res) => {
     res.send(200)
   })
-
-  app.use(errorHandler)
 
   app.get('/', (req, res) => {
     res.redirect('/keystone/')
