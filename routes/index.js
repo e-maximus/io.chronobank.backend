@@ -80,7 +80,7 @@ exports = module.exports = function (app) {
       phone: body.phone,
       enquiryType: 'message',
       message: body.message
-    }).save()
+    })
     res.send(persisted)
   })
 
