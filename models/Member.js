@@ -15,6 +15,6 @@ Member.add({
   brief: { type: Types.Html, wysiwyg: true, height: 150 }
 })
 
-Member.defaultColumns = 'order, name, avatar, position'
+Member.defaultColumns = 'name, avatar, position'
 
 Member.register()
