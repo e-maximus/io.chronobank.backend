@@ -9,7 +9,6 @@ const Member = new keystone.List('Member', {
 
 Member.add({
   name: { type: String, required: true },
-  order: { type: String },
   avatar: { type: Types.CloudinaryImage },
   avatar2x: { type: Types.CloudinaryImage },
   position: { type: String },
