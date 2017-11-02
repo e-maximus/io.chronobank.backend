@@ -6,6 +6,7 @@ const restful = require('restful-keystone')(keystone, {
 
 const Product = keystone.list('Product')
 const Enquiry = keystone.list('Enquiry')
+const Member = keystone.list('Member')
 const Application = keystone.list('Application')
 const Subscription = keystone.list('Subscription')
 const Header = keystone.list('Header')
@@ -126,6 +127,14 @@ exports = module.exports = function (app) {
     })))
   })
 
+  app.get('/api/v1/members', async (req, res) => {
+    const members = await Member.model
+      .find()
+      .sort(req.query.order || 'sortOrder')
+      .exec()
+    res.send(members)
+  })
+
   restful.expose({
     Article: {
       methods: ['list', 'retrieve']
@@ -143,7 +152,7 @@ exports = module.exports = function (app) {
       methods: ['list', 'retrieve'],
     },
     Member: {
-      methods: ['list', 'retrieve']
+      methods: ['retrieve']
     },
     Partner: {
       methods: ['list', 'retrieve']

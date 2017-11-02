@@ -3,7 +3,8 @@ const Types = keystone.Field.Types
 
 const Member = new keystone.List('Member', {
   map: { name: 'name' },
-  autokey: { path: 'slug', from: 'name', unique: true }
+  autokey: { path: 'slug', from: 'name', unique: true },
+  sortable: true
 })
 
 Member.add({

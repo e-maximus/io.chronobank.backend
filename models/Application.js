@@ -16,5 +16,5 @@ Application.add({
 })
 
 Application.defaultSort = '-createdAt'
-Application.defaultColumns = 'name, email, enquiryType, createdAt'
+Application.defaultColumns = 'name, email, phone, createdAt'
 Application.register()
