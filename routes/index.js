@@ -132,7 +132,9 @@ exports = module.exports = function (app) {
       .find()
       .sort(req.query.order || 'sortOrder')
       .exec()
-    res.send(members)
+    res.send({
+      members
+    })
   })
 
   restful.expose({
