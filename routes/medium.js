@@ -13,8 +13,6 @@ const MEDIUM = axios.create({
 
 router.get('/feed', cache(), async (req, res) => {
 
-  const imageRegex = /<figure><img.*?src="(.*?)".*?\>.*?<\/figure>/gm
-
   const items = []
   const feedparser = (maxAge) => new FeedParser({
     normalize: false
@@ -32,10 +30,11 @@ router.get('/feed', cache(), async (req, res) => {
     })
     .on('end', () => {
       res.sendCached(maxAge, items.map(item => {
+        const imageRegex = /<figure><img.*?src="(.*?)".*?\>.*?<\/figure>/gm
         const imageMatch = imageRegex.exec(item['content:encoded']['#']) // returns first match
         return {
           guid: item['rss:guid']['#'],
-          link: item['rss:link']['#'],
+          url: item['rss:link']['#'],
           title: item['rss:title']['#'],
           image: imageMatch ? imageMatch[1] : null,
           categories: item.categories,
