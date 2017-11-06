@@ -11,7 +11,7 @@ var keystone = require('keystone')
 
 keystone.init({
   'name': 'backend.chronobank.io',
-  'brand': 'backend.chronobank.io',
+  'brand': 'Chronobank.io',
   'mongo': process.env.MONGO_URI || "mongodb://localhost:27017/backend-chronobank-io",
 
   'sass': 'public',
