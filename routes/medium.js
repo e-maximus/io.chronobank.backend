@@ -37,7 +37,6 @@ router.get('/feed', cache(), async (req, res) => {
           guid: item['rss:guid']['#'],
           link: item['rss:link']['#'],
           title: item['rss:title']['#'],
-          item,
           image: imageMatch ? imageMatch[1] : null,
           categories: item.categories,
           publishedDate: moment(new Date(item['rss:pubdate']['#'])).toISOString()
