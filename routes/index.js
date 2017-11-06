@@ -1,5 +1,6 @@
 const keystone = require('keystone')
 const middleware = require('./middleware')
+const medium = require('./medium')
 const restful = require('restful-keystone')(keystone, {
   root: '/api/v1',
 })
@@ -136,6 +137,8 @@ exports = module.exports = function (app) {
       members
     })
   })
+
+  app.use('/api/v1/medium', medium)
 
   restful.expose({
     Article: {
