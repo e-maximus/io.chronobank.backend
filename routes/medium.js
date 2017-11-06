@@ -32,16 +32,12 @@ router.get('/feed', cache(), async (req, res) => {
     })
     .on('end', () => {
       res.sendCached(maxAge, items.map(item => {
-        const description = sanitizeHtml(item.meta['rss:description']['#'], {
-          allowedTags: [],
-          allowedAttributes: []
-        })
         const imageMatch = imageRegex.exec(item['content:encoded']['#']) // returns first match
         return {
           guid: item['rss:guid']['#'],
           link: item['rss:link']['#'],
           title: item['rss:title']['#'],
-          description,
+          item,
           image: imageMatch ? imageMatch[1] : null,
           categories: item.categories,
           publishedDate: moment(new Date(item['rss:pubdate']['#'])).toISOString()
