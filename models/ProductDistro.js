@@ -3,7 +3,8 @@ const Types = keystone.Field.Types
 
 const ProductDistro = new keystone.List('ProductDistro', {
   map: { name: 'name' },
-  autokey: { path: 'slug', from: 'name', unique: true }
+  autokey: { path: 'slug', from: 'name', unique: true },
+  sortable: true
 })
 
 ProductDistro.add({
@@ -18,5 +19,7 @@ ProductDistro.add({
 })
 
 ProductDistro.relationship({ ref: 'Product', path: 'product', refPath: 'distros' })
+
+ProductDistro.defaultColumns = 'title, icon, type, url'
 
 ProductDistro.register()

@@ -3,7 +3,8 @@ const Types = keystone.Field.Types
 
 const ProductDownload = new keystone.List('ProductFeature', {
   map: { name: 'name' },
-  autokey: { path: 'slug', from: 'name', unique: true }
+  autokey: { path: 'slug', from: 'name', unique: true },
+  sortable: true
 })
 
 ProductDownload.add({

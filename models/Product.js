@@ -3,7 +3,8 @@ const Types = keystone.Field.Types
 
 const Product = new keystone.List('Product', {
   map: { name: 'name' },
-  autokey: { path: 'slug', from: 'name', unique: true }
+  autokey: { path: 'slug', from: 'name', unique: true },
+  sortable: true
 })
 
 Product.add({
@@ -27,5 +28,7 @@ Product.add({
   distros: { type: Types.Relationship, ref: 'ProductDistro', many: true },
   features: { type: Types.Relationship, ref: 'ProductFeature', many: true }
 })
+
+Product.defaultColumns = 'title, name, icon, image'
 
 Product.register()

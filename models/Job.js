@@ -3,7 +3,8 @@ const Types = keystone.Field.Types
 
 const Job = new keystone.List('Job', {
   map: { name: 'title' },
-  autokey: { path: 'slug', from: 'title', unique: true }
+  autokey: { path: 'slug', from: 'title', unique: true },
+  sortable: true
 })
 
 Job.add({

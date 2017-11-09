@@ -3,7 +3,8 @@ const Types = keystone.Field.Types
 
 const Story = new keystone.List('Story', {
   map: { name: 'title' },
-  autokey: { path: 'slug', from: 'title', unique: true }
+  autokey: { path: 'slug', from: 'title', unique: true },
+  sortable: true
 })
 
 Story.add({
@@ -21,5 +22,7 @@ Story.add({
   legend: { type: String },
   brief: { type: Types.Html, wysiwyg: true, height: 150 }
 })
+
+Story.defaultColumns = 'title, image, legend'
 
 Story.register()

@@ -3,7 +3,8 @@ const Types = keystone.Field.Types
 
 const Article = new keystone.List('Article', {
   map: { name: 'title' },
-  autokey: { path: 'slug', from: 'title', unique: true }
+  autokey: { path: 'slug', from: 'title', unique: true },
+  sortable: true
 })
 
 Article.add({
@@ -14,5 +15,7 @@ Article.add({
   icon2x: { type: Types.CloudinaryImage },
   brief: { type: Types.Html, wysiwyg: true, height: 150 }
 })
+
+Article.defaultColumns = 'title, icon, source, url'
 
 Article.register()

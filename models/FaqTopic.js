@@ -3,7 +3,8 @@ const keystone = require('keystone')
 
 const FaqTopic = new keystone.List('FaqTopic', {
   map: { name: 'name' },
-  autokey: { path: 'slug', from: 'name', unique: true }
+  autokey: { path: 'slug', from: 'name', unique: true },
+  sortable: true
 })
 
 FaqTopic.add({

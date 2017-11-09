@@ -3,7 +3,8 @@ const Types = keystone.Field.Types
 
 const Feature = new keystone.List('Feature', {
   map: { name: 'title' },
-  autokey: { path: 'slug', from: 'title', unique: true }
+  autokey: { path: 'slug', from: 'title', unique: true },
+  sortable: true
 })
 
 Feature.add({
@@ -11,5 +12,7 @@ Feature.add({
   image: { type: Types.CloudinaryImage },
   brief: { type: Types.Html, wysiwyg: true, height: 150 }
 })
+
+Feature.defaultColumns = 'title, image'
 
 Feature.register()

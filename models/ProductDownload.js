@@ -3,7 +3,8 @@ const Types = keystone.Field.Types
 
 const ProductDownload = new keystone.List('ProductDownload', {
   map: { name: 'title' },
-  autokey: { path: 'slug', from: 'title', unique: true }
+  autokey: { path: 'slug', from: 'title', unique: true },
+  sortable: true
 })
 
 ProductDownload.add({
@@ -13,5 +14,7 @@ ProductDownload.add({
 })
 
 ProductDownload.relationship({ ref: 'Product', path: 'product', refPath: 'downloads' })
+
+ProductDownload.defaultColumns = 'title, icon, url'
 
 ProductDownload.register()

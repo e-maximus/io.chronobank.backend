@@ -17,6 +17,7 @@ keystone.init({
   'sass': 'public',
   'static': 'public',
   'favicon': 'public/favicon.ico',
+  'signin logo': ['/logo.svg', 279, 33], // relative to public directory
 
   'auto update': true,
   'session': true,

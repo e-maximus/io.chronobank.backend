@@ -3,7 +3,7 @@ const Types = keystone.Field.Types
 
 const Application = new keystone.List('Application', {
   nocreate: true,
-  noedit: true,
+  noedit: true
 })
 
 Application.add({

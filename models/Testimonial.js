@@ -3,7 +3,8 @@ const Types = keystone.Field.Types
 
 const Testimonial = new keystone.List('Testimonial', {
   map: { name: 'name' },
-  autokey: { path: 'slug', from: 'name', unique: true }
+  autokey: { path: 'slug', from: 'name', unique: true },
+  sortable: true
 })
 
 Testimonial.add({
@@ -15,5 +16,7 @@ Testimonial.add({
   image2x448: { type: Types.CloudinaryImage },
   brief: { type: Types.Html, wysiwyg: true, height: 150 }
 })
+
+Testimonial.defaultColumns = 'name, position, image'
 
 Testimonial.register()
