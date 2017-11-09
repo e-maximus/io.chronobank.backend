@@ -120,6 +120,7 @@ exports = module.exports = function (app) {
   app.get('/api/v1/faq-topics', async (req, res) => {
     const topics = await FaqTopic.model
       .find()
+      .sort(req.query.order || 'sortOrder')
       .populate('questions')
       .exec()
     res.send(topics.map(topic => ({

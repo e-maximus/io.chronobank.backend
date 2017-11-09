@@ -1,7 +1,7 @@
 const express = require('express')
 const axios = require('axios')
 const FeedParser = require('feedparser')
-const sanitizeHtml = require('sanitize-html')
+// const sanitizeHtml = require('sanitize-html')
 const moment = require('moment')
 const cache = require('../middleware/cache')
 
