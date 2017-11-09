@@ -121,6 +121,7 @@ exports = module.exports = function (app) {
     const topics = await FaqTopic.model
       .find()
       .sort(req.query.order || 'sortOrder')
+      .sort('questions.sortOrder')
       .populate('questions')
       .exec()
     res.send(topics.map(topic => ({
