@@ -145,6 +145,9 @@ exports = module.exports = function (app) {
     Article: {
       methods: ['list', 'retrieve']
     },
+    Contact: {
+      methods: ['list', 'retrieve']
+    },
     Feature: {
       methods: ['list', 'retrieve']
     },
@@ -160,6 +163,9 @@ exports = module.exports = function (app) {
     Member: {
       methods: ['retrieve']
     },
+    Paper: {
+      methods: ['list', 'retrieve']
+    },
     Partner: {
       methods: ['list', 'retrieve']
     },
@@ -170,6 +176,9 @@ exports = module.exports = function (app) {
     Product: {
       methods: ['list', 'retrieve'],
       populate: ['downloads', 'distros', 'features'],
+    },
+    Social: {
+      methods: ['list', 'retrieve']
     },
     Statistic: {
       methods: ['list', 'retrieve']
