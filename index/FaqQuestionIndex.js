@@ -39,7 +39,7 @@ async function search (
   const pattern = /([\!\*\+\-\=\<\>\&\|\(\)\[\]\{\}\^\~\?\:\"])/g
   const params = {
     defType: 'edismax',
-    q: query.replace(pattern, "\\$1"),
+    q: query === '*' ? '*' : query.replace(pattern, "\\$1"),
     fq: !topic
       ? null
       : (Array.isArray(topic) ? topic : [ topic ]).map(c => `(topic_s:${c})`).join(' OR '),
