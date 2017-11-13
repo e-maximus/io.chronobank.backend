@@ -22,6 +22,10 @@ Header.add({
   image320: { type: Types.CloudinaryImage },
   image480: { type: Types.CloudinaryImage },
   image640: { type: Types.CloudinaryImage },
+  image2x: { type: Types.CloudinaryImage },
+  image2x320: { type: Types.CloudinaryImage },
+  image2x480: { type: Types.CloudinaryImage },
+  image2x640: { type: Types.CloudinaryImage },
   video: { type: Types.Url },
   brief: { type: Types.Html, wysiwyg: true, height: 300 },
 })
