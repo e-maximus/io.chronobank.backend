@@ -22,6 +22,6 @@ Menu.add({
 
 Menu.relationship({ ref: 'Menu', path: 'parent', refPath: 'children' })
 
-Menu.defaultColumns = 'title, url, icon18x18, icon40x40'
+Menu.defaultColumns = 'title, symbol, icon32x32, icon40x40, isVisibleInHeader, isVisibleInFooter, url'
 
 Menu.register()
