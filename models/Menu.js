@@ -10,9 +10,17 @@ Menu.add({
   title: { type: String, required: true },
   subtitle: { type: String },
   url: { type: String },
-  icon18x18: { type: Types.CloudinaryImage },
-  icon40x40: { type: Types.CloudinaryImage }
+  parent: { },
+  symbol: { type: Types.CloudinaryImage },
+  icon32x32: { type: Types.CloudinaryImage },
+  icon40x40: { type: Types.CloudinaryImage },
+  children: { type: Types.Relationship, ref: 'Menu', many: true },
+}, 'Display Options', {
+  isVisibleInHeader: { type: Boolean, label: 'Show in the Header section' },
+  isVisibleInFooter: { type: Boolean, label: 'Show in the Footer section' }
 })
+
+Menu.relationship({ ref: 'Menu', path: 'parent', refPath: 'children' })
 
 Menu.defaultColumns = 'title, url, icon18x18, icon40x40'
 
