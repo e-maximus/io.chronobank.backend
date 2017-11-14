@@ -164,6 +164,9 @@ exports = module.exports = function (app) {
     Feature: {
       methods: ['list', 'retrieve']
     },
+    Gallery: {
+      methods: ['list', 'retrieve']
+    },
     Job: {
       methods: ['list', 'retrieve']
     },
