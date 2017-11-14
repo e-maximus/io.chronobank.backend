@@ -14,6 +14,7 @@ const Header = keystone.list('Header')
 const Story = keystone.list('Story')
 const FaqTopic = keystone.list('FaqTopic')
 const FaqQuestion = keystone.list('FaqQuestion')
+const Menu = keystone.list('Menu')
 
 const FaqQuestionIndex = require('../index/FaqQuestionIndex')
 
@@ -139,6 +140,18 @@ exports = module.exports = function (app) {
     })
   })
 
+  app.get('/api/v1/menus', async (req, res) => {
+    const menus = await Menu.model
+      .find()
+      .sort(req.query.order || 'sortOrder')
+      .populate({ path: 'children', options: { sort: { sortOrder: 1 } } })
+      .exec()
+    res.send(menus.map(menu => ({
+      ...menu.toJSON(),
+      children: [...menu.children]
+    })))
+  })
+
   app.use('/api/v1/medium', medium)
 
   restful.expose({
@@ -161,6 +174,9 @@ exports = module.exports = function (app) {
       methods: ['list', 'retrieve'],
     },
     Member: {
+      methods: ['retrieve']
+    },
+    Menu: {
       methods: ['retrieve']
     },
     Paper: {
