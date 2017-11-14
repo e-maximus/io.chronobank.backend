@@ -10,7 +10,6 @@ Menu.add({
   title: { type: String, required: true },
   subtitle: { type: String },
   url: { type: String },
-  parent: { },
   symbol: { type: Types.CloudinaryImage },
   icon32x32: { type: Types.CloudinaryImage },
   icon40x40: { type: Types.CloudinaryImage },
