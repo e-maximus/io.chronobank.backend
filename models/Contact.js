@@ -10,6 +10,7 @@ Contact.add({
   title: { type: String, required: true },
   icon32x32: { type: Types.CloudinaryImage },
   url: { type: String },
+  label: { type: String },
 }, 'Display Options', {
   isVisibleInContacts: { type: Boolean, label: 'Show in the Contacts section' },
   isVisibleInFooter: { type: Boolean, label: 'Show in the Footer section' }
