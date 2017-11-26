@@ -1,4 +1,5 @@
 const keystone = require('keystone')
+const download = require('../utils').download.intoDirectory(process.env.UPLOAD_DIR)
 const Types = keystone.Field.Types
 
 const Iteration = new keystone.List('Iteration', {
@@ -15,5 +16,15 @@ Iteration.add({
 })
 
 Iteration.defaultColumns = 'title, image, date'
+
+Iteration.schema.post('save', async (d) => {
+  if (d.image && d.image.secure_url) {
+    try {
+      await download(d.image.secure_url)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+})
 
 Iteration.register()
