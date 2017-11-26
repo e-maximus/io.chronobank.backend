@@ -69,21 +69,21 @@ exports = module.exports = function (app) {
   })
 
   app.get('/api/v1/headers/s/:slug', async (req, res) => {
-    const headers = await Header.model
+    const header = await Header.model
       .findOne({
         'slug': req.params.slug
       })
       .exec()
-    res.send({
-      headers
-    })
+    res.send(header)
   })
 
   app.get('/api/v1/headers', async (req, res) => {
-    const product = await Header.model
+    const headers = await Header.model
       .find()
       .exec()
-    res.send(product)
+    res.send({
+      headers
+    })
   })
 
   app.get('/api/v1/stories/s/:slug', async (req, res) => {
