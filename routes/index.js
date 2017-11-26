@@ -56,11 +56,32 @@ exports = module.exports = function (app) {
     res.send(product)
   })
 
+  app.get('/api/v1/products', async (req, res) => {
+    const products = await Product.model
+      .find({})
+      .populate('downloads')
+      .populate('distros')
+      .populate('features')
+      .exec()
+    res.send({
+      products
+    })
+  })
+
   app.get('/api/v1/headers/s/:slug', async (req, res) => {
-    const product = await Header.model
+    const headers = await Header.model
       .findOne({
         'slug': req.params.slug
       })
+      .exec()
+    res.send({
+      headers
+    })
+  })
+
+  app.get('/api/v1/headers', async (req, res) => {
+    const product = await Header.model
+      .find()
       .exec()
     res.send(product)
   })
@@ -171,7 +192,7 @@ exports = module.exports = function (app) {
       methods: ['list', 'retrieve']
     },
     Header: {
-      methods: ['list', 'retrieve'],
+      methods: ['retrieve'],
     },
     Iteration: {
       methods: ['list', 'retrieve'],
@@ -193,7 +214,7 @@ exports = module.exports = function (app) {
       populate: ['categories', 'author'],
     },
     Product: {
-      methods: ['list', 'retrieve'],
+      methods: ['retrieve'],
       populate: ['downloads', 'distros', 'features'],
     },
     Social: {
