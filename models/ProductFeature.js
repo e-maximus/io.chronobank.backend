@@ -1,4 +1,5 @@
 const keystone = require('keystone')
+const download = require('../utils').download.intoDirectory(process.env.UPLOAD_DIR)
 const Types = keystone.Field.Types
 
 const ProductFeature = new keystone.List('ProductFeature', {
@@ -15,5 +16,13 @@ ProductFeature.add({
 })
 
 ProductFeature.relationship({ ref: 'Product', path: 'product', refPath: 'features' })
+
+ProductFeature.schema.post('save', async (d) => {
+  await Promise.all([d.image, d.image2x]
+    .map(image => (image && image.secure_url)
+      ? download(image.secure_url)
+      : Promise.resolve())
+    )
+})
 
 ProductFeature.register()

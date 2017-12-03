@@ -1,4 +1,5 @@
 const keystone = require('keystone')
+const download = require('../utils').download.intoDirectory(process.env.UPLOAD_DIR)
 const Types = keystone.Field.Types
 
 const Menu = new keystone.List('Menu', {
@@ -22,5 +23,13 @@ Menu.add({
 Menu.relationship({ ref: 'Menu', path: 'parent', refPath: 'children' })
 
 Menu.defaultColumns = 'title, symbol, icon32x32, icon40x40, isVisibleInHeader, isVisibleInFooter, url'
+
+Menu.schema.post('save', async (d) => {
+  await Promise.all([d.symbol, d.icon32x32, d.icon40x40]
+    .map(image => (image && image.secure_url)
+      ? download(image.secure_url)
+      : Promise.resolve())
+    )
+})
 
 Menu.register()

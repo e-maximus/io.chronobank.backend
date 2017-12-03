@@ -1,4 +1,5 @@
 const keystone = require('keystone')
+const download = require('../utils').download.intoDirectory(process.env.UPLOAD_DIR)
 const Types = keystone.Field.Types
 
 const ProductDistro = new keystone.List('ProductDistro', {
@@ -21,5 +22,11 @@ ProductDistro.add({
 ProductDistro.relationship({ ref: 'Product', path: 'product', refPath: 'distros' })
 
 ProductDistro.defaultColumns = 'title, icon, type, url'
+
+ProductDistro.schema.post('save', async (d) => {
+  if (d.icon && d.icon.secure_url) {
+    await download(d.icon.secure_url)
+  }
+})
 
 ProductDistro.register()

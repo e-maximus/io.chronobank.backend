@@ -1,4 +1,5 @@
 const keystone = require('keystone')
+const download = require('../utils').download.intoDirectory(process.env.UPLOAD_DIR)
 const Types = keystone.Field.Types
 
 const Statistic = new keystone.List('Statistic', {
@@ -14,5 +15,11 @@ Statistic.add({
 })
 
 Statistic.defaultColumns = 'title, image'
+
+Statistic.schema.post('save', async (d) => {
+  if (d.image && d.image.secure_url) {
+    await download(d.image.secure_url)
+  }
+})
 
 Statistic.register()

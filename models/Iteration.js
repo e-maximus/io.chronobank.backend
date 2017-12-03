@@ -19,11 +19,7 @@ Iteration.defaultColumns = 'title, image, date'
 
 Iteration.schema.post('save', async (d) => {
   if (d.image && d.image.secure_url) {
-    try {
-      await download(d.image.secure_url)
-    } catch (e) {
-      console.log(e)
-    }
+    await download(d.image.secure_url)
   }
 })
 

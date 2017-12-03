@@ -1,4 +1,5 @@
 const keystone = require('keystone')
+const download = require('../utils').download.intoDirectory(process.env.UPLOAD_DIR)
 const Types = keystone.Field.Types
 
 const Contact = new keystone.List('Contact', {
@@ -17,5 +18,11 @@ Contact.add({
 })
 
 Contact.defaultColumns = 'title, icon32x32, url'
+
+Contact.schema.post('save', async (d) => {
+  if (d.icon32x32 && d.icon32x32.secure_url) {
+    await download(d.icon32x32.secure_url)
+  }
+})
 
 Contact.register()

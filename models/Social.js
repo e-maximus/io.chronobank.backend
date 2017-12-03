@@ -1,4 +1,5 @@
 const keystone = require('keystone')
+const download = require('../utils').download.intoDirectory(process.env.UPLOAD_DIR)
 const Types = keystone.Field.Types
 
 const Social = new keystone.List('Social', {
@@ -13,5 +14,11 @@ Social.add({
 })
 
 Social.defaultColumns = 'title, icon32x32, url'
+
+Social.schema.post('save', async (d) => {
+  if (d.icon32x32 && d.icon32x32.secure_url) {
+    await download(d.icon32x32.secure_url)
+  }
+})
 
 Social.register()

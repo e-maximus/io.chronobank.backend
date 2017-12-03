@@ -1,4 +1,5 @@
 const keystone = require('keystone')
+const download = require('../utils').download.intoDirectory(process.env.UPLOAD_DIR)
 const Types = keystone.Field.Types
 
 const Article = new keystone.List('Article', {
@@ -17,5 +18,13 @@ Article.add({
 })
 
 Article.defaultColumns = 'title, icon, source, url'
+
+Article.schema.post('save', async (d) => {
+  await Promise.all([d.icon, d.icon2x]
+    .map(image => (image && image.secure_url)
+      ? download(image.secure_url)
+      : Promise.resolve())
+    )
+})
 
 Article.register()
