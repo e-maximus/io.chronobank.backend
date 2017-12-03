@@ -186,7 +186,8 @@ exports = module.exports = function (app) {
       methods: ['list', 'retrieve']
     },
     Gallery: {
-      methods: ['list', 'retrieve']
+      methods: ['list', 'retrieve'],
+      populate: ['images'],
     },
     Job: {
       methods: ['list', 'retrieve']
