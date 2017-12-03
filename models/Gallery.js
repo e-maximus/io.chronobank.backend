@@ -1,7 +1,9 @@
 const keystone = require('keystone')
 
 const Gallery = new keystone.List('Gallery', {
-  autokey: { from: 'name', path: 'key', unique: true },
+  map: { name: 'name' },
+  autokey: { path: 'slug', from: 'name', unique: true },
+  sortable: true
 })
 
 Gallery.add({

@@ -5,6 +5,7 @@ const restful = require('restful-keystone')(keystone, {
   root: '/api/v1',
 })
 
+const Gallery = keystone.list('Gallery')
 const Product = keystone.list('Product')
 const Enquiry = keystone.list('Enquiry')
 const Member = keystone.list('Member')
@@ -42,6 +43,26 @@ exports = module.exports = function (app) {
 
   app.get('/', (req, res) => {
     res.redirect('/keystone/')
+  })
+
+  app.get('/api/v1/galleries/s/:slug', async (req, res) => {
+    const gallery = await Product.model
+      .findOne({
+        'slug': req.params.slug
+      })
+      .populate({ path: 'images', options: { sort: { sortOrder: 1 } } })
+      .exec()
+    res.send(gallery)
+  })
+
+  app.get('/api/v1/galleries', async (req, res) => {
+    const galleries = await Product.model
+      .find({})
+      .populate({ path: 'images', options: { sort: { sortOrder: 1 } } })
+      .exec()
+    res.send({
+      galleries
+    })
   })
 
   app.get('/api/v1/products/s/:slug', async (req, res) => {
@@ -184,10 +205,6 @@ exports = module.exports = function (app) {
     },
     Feature: {
       methods: ['list', 'retrieve']
-    },
-    Gallery: {
-      methods: ['list', 'retrieve'],
-      populate: ['images'],
     },
     Job: {
       methods: ['list', 'retrieve']
