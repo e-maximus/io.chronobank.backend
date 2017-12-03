@@ -11,6 +11,13 @@ Gallery.add({
   publishedDate: { type: Date, default: Date.now }
 })
 
+Gallery.schema.virtual('images', {
+  ref: 'GalleryImage',
+  localField: '_id',
+  foreignField: 'gallery',
+  justOne: false
+})
+
 Gallery.relationship({ path: 'images', ref: 'GalleryImage', refPath: 'gallery' })
 
 Gallery.register()
