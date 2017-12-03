@@ -14,8 +14,6 @@ GalleryImage.add({
   image: { type: Types.CloudinaryImage, initial: true, required: true }
 })
 
-GalleryImage.relationship({ ref: 'Gallery', path: 'gallery', refPath: 'images' })
-
 GalleryImage.defaultColumns = 'title, icon, url'
 
 GalleryImage.schema.post('save', async (d) => {
