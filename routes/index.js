@@ -46,7 +46,7 @@ exports = module.exports = function (app) {
   })
 
   app.get('/api/v1/galleries/s/:slug', async (req, res) => {
-    const gallery = await Product.model
+    const gallery = await Gallery.model
       .findOne({
         'slug': req.params.slug
       })
@@ -56,7 +56,7 @@ exports = module.exports = function (app) {
   })
 
   app.get('/api/v1/galleries', async (req, res) => {
-    const galleries = await Product.model
+    const galleries = await Gallery.model
       .find({})
       .populate({ path: 'images', options: { sort: { sortOrder: 1 } } })
       .exec()
