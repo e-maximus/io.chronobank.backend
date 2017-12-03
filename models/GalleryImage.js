@@ -14,7 +14,7 @@ GalleryImage.add({
   image: { type: Types.CloudinaryImage, initial: true, required: true }
 })
 
-GalleryImage.defaultColumns = 'title, icon, url'
+GalleryImage.defaultColumns = 'title, gallery, image'
 
 GalleryImage.schema.post('save', async (d) => {
   if (d.image && d.image.secure_url) {
