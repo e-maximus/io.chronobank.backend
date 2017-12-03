@@ -52,7 +52,10 @@ exports = module.exports = function (app) {
       })
       .populate({ path: 'images', options: { sort: { sortOrder: 1 } } })
       .exec()
-    res.send(gallery)
+    res.send({
+      ...gallery,
+      images: [...gallery.images]
+    })
   })
 
   app.get('/api/v1/galleries', async (req, res) => {
@@ -61,7 +64,10 @@ exports = module.exports = function (app) {
       .populate({ path: 'images', options: { sort: { sortOrder: 1 } } })
       .exec()
     res.send({
-      galleries
+      galleries: galleries.map(gallery => ({
+        ...gallery.toJSON(),
+        images: [...gallery.images]
+      }))
     })
   })
 
