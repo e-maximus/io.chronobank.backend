@@ -9,8 +9,9 @@ const GalleryImage = new keystone.List('GalleryImage', {
 })
 
 GalleryImage.add({
-  title: { type: String, required: true },
-  image: { type: Types.CloudinaryImage }
+  title: { type: String, initial: true, required: true },
+  gallery: { type: Types.Relationship, ref: 'Gallery', initial: true, required: true },
+  image: { type: Types.CloudinaryImage, initial: true, required: true }
 })
 
 GalleryImage.relationship({ ref: 'Gallery', path: 'gallery', refPath: 'images' })

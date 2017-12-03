@@ -1,5 +1,4 @@
 const keystone = require('keystone')
-const Types = keystone.Field.Types
 
 const Gallery = new keystone.List('Gallery', {
   autokey: { from: 'name', path: 'key', unique: true },
@@ -7,8 +6,9 @@ const Gallery = new keystone.List('Gallery', {
 
 Gallery.add({
   name: { type: String, required: true },
-  publishedDate: { type: Date, default: Date.now },
-  images: { type: Types.Relationship, ref: 'GalleryImage', many: true }
+  publishedDate: { type: Date, default: Date.now }
 })
+
+Gallery.relationship({ path: 'images', ref: 'GalleryImage', refPath: 'gallery' })
 
 Gallery.register()
