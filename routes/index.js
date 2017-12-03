@@ -53,7 +53,7 @@ exports = module.exports = function (app) {
       .populate({ path: 'images', options: { sort: { sortOrder: 1 } } })
       .exec()
     res.send({
-      ...gallery,
+      ...gallery.toJSON(),
       images: [...gallery.images]
     })
   })
