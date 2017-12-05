@@ -1,4 +1,5 @@
 const keystone = require('keystone')
+const download = require('../utils').download.intoDirectory(process.env.UPLOAD_DIR)
 const Types = keystone.Field.Types
 
 const Member = new keystone.List('Member', {
@@ -16,5 +17,13 @@ Member.add({
 })
 
 Member.defaultColumns = 'name, avatar, position'
+
+Member.schema.post('save', async (d) => {
+  await Promise.all([d.avatar, d.avatar2x]
+    .map(image => (image && image.secure_url)
+      ? download(image.secure_url)
+      : Promise.resolve())
+    )
+})
 
 Member.register()

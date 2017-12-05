@@ -5,6 +5,7 @@ const restful = require('restful-keystone')(keystone, {
   root: '/api/v1',
 })
 
+const Gallery = keystone.list('Gallery')
 const Product = keystone.list('Product')
 const Enquiry = keystone.list('Enquiry')
 const Member = keystone.list('Member')
@@ -44,6 +45,32 @@ exports = module.exports = function (app) {
     res.redirect('/keystone/')
   })
 
+  app.get('/api/v1/galleries/s/:slug', async (req, res) => {
+    const gallery = await Gallery.model
+      .findOne({
+        'slug': req.params.slug
+      })
+      .populate({ path: 'images', options: { sort: { sortOrder: 1 } } })
+      .exec()
+    res.send({
+      ...gallery.toJSON(),
+      images: [...gallery.images]
+    })
+  })
+
+  app.get('/api/v1/galleries', async (req, res) => {
+    const galleries = await Gallery.model
+      .find({})
+      .populate({ path: 'images', options: { sort: { sortOrder: 1 } } })
+      .exec()
+    res.send({
+      galleries: galleries.map(gallery => ({
+        ...gallery.toJSON(),
+        images: [...gallery.images]
+      }))
+    })
+  })
+
   app.get('/api/v1/products/s/:slug', async (req, res) => {
     const product = await Product.model
       .findOne({
@@ -56,13 +83,34 @@ exports = module.exports = function (app) {
     res.send(product)
   })
 
+  app.get('/api/v1/products', async (req, res) => {
+    const products = await Product.model
+      .find({})
+      .populate('downloads')
+      .populate('distros')
+      .populate('features')
+      .exec()
+    res.send({
+      products
+    })
+  })
+
   app.get('/api/v1/headers/s/:slug', async (req, res) => {
-    const product = await Header.model
+    const header = await Header.model
       .findOne({
         'slug': req.params.slug
       })
       .exec()
-    res.send(product)
+    res.send(header)
+  })
+
+  app.get('/api/v1/headers', async (req, res) => {
+    const headers = await Header.model
+      .find()
+      .exec()
+    res.send({
+      headers
+    })
   })
 
   app.get('/api/v1/stories/s/:slug', async (req, res) => {
@@ -164,14 +212,11 @@ exports = module.exports = function (app) {
     Feature: {
       methods: ['list', 'retrieve']
     },
-    Gallery: {
-      methods: ['list', 'retrieve']
-    },
     Job: {
       methods: ['list', 'retrieve']
     },
     Header: {
-      methods: ['list', 'retrieve'],
+      methods: ['retrieve'],
     },
     Iteration: {
       methods: ['list', 'retrieve'],
@@ -193,7 +238,7 @@ exports = module.exports = function (app) {
       populate: ['categories', 'author'],
     },
     Product: {
-      methods: ['list', 'retrieve'],
+      methods: ['retrieve'],
       populate: ['downloads', 'distros', 'features'],
     },
     Social: {

@@ -1,4 +1,5 @@
 const keystone = require('keystone')
+const download = require('../utils').download.intoDirectory(process.env.UPLOAD_DIR)
 const Types = keystone.Field.Types
 
 const Header = new keystone.List('Header', {
@@ -28,6 +29,14 @@ Header.add({
   image2x640: { type: Types.CloudinaryImage },
   video: { type: Types.Url },
   brief: { type: Types.Html, wysiwyg: true, height: 300 },
+})
+
+Header.schema.post('save', async (d) => {
+  await Promise.all([d.image, d.image320, d.image480, d.image640, d.image2x, d.image2x320, d.image2x480, d.image2x640]
+    .map(image => (image && image.secure_url)
+      ? download(image.secure_url)
+      : Promise.resolve())
+    )
 })
 
 Header.register()

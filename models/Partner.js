@@ -1,4 +1,5 @@
 const keystone = require('keystone')
+const download = require('../utils').download.intoDirectory(process.env.UPLOAD_DIR)
 const Types = keystone.Field.Types
 
 const Partner = new keystone.List('Partner', {
@@ -16,5 +17,13 @@ Partner.add({
 })
 
 Partner.defaultColumns = 'title, icon, url'
+
+Partner.schema.post('save', async (d) => {
+  await Promise.all([d.icon, d.icon2x]
+    .map(image => (image && image.secure_url)
+      ? download(image.secure_url)
+      : Promise.resolve())
+    )
+})
 
 Partner.register()

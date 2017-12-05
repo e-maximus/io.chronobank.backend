@@ -1,4 +1,5 @@
 const keystone = require('keystone')
+const download = require('../utils').download.intoDirectory(process.env.UPLOAD_DIR)
 const Types = keystone.Field.Types
 
 const ProductDownload = new keystone.List('ProductDownload', {
@@ -16,5 +17,11 @@ ProductDownload.add({
 ProductDownload.relationship({ ref: 'Product', path: 'product', refPath: 'downloads' })
 
 ProductDownload.defaultColumns = 'title, icon, url'
+
+ProductDownload.schema.post('save', async (d) => {
+  if (d.icon && d.icon.secure_url) {
+    await download(d.icon.secure_url)
+  }
+})
 
 ProductDownload.register()

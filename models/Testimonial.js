@@ -1,4 +1,5 @@
 const keystone = require('keystone')
+const download = require('../utils').download.intoDirectory(process.env.UPLOAD_DIR)
 const Types = keystone.Field.Types
 
 const Testimonial = new keystone.List('Testimonial', {
@@ -18,5 +19,13 @@ Testimonial.add({
 })
 
 Testimonial.defaultColumns = 'name, position, image'
+
+Testimonial.schema.post('save', async (d) => {
+  await Promise.all([d.image, d.image2x, d.image448, d.image2x448]
+    .map(image => (image && image.secure_url)
+      ? download(image.secure_url)
+      : Promise.resolve())
+    )
+})
 
 Testimonial.register()

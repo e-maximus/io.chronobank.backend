@@ -10,6 +10,7 @@
     "dotenv": "4.0.0",
     "express-handlebars": "3.0.0",
     "feedparser": "^2.2.3",
+    "fs-extra": "^4.0.2",
     "handlebars": "4.0.6",
     "keystone": "4.0.0-beta.5",
     "lodash": "^4.13.1",

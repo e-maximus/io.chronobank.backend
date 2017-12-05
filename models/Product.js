@@ -1,4 +1,5 @@
 const keystone = require('keystone')
+const download = require('../utils').download.intoDirectory(process.env.UPLOAD_DIR)
 const Types = keystone.Field.Types
 
 const Product = new keystone.List('Product', {
@@ -30,5 +31,13 @@ Product.add({
 })
 
 Product.defaultColumns = 'title, name, icon, image'
+
+Product.schema.post('save', async (d) => {
+  await Promise.all([d.icon, d.icon2x, d.image, d.image2x]
+    .map(image => (image && image.secure_url)
+      ? download(image.secure_url)
+      : Promise.resolve())
+    )
+})
 
 Product.register()
