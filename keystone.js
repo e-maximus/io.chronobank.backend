@@ -3,8 +3,8 @@
 require('dotenv').config()
 
 // Require keystone
-var keystone = require('keystone')
-
+const keystone = require('keystone')
+const config = require('config')
 // Initialise Keystone with your project's configuration.
 // See http://keystonejs.com/guide/config for available options
 // and documentation.
@@ -12,7 +12,7 @@ var keystone = require('keystone')
 keystone.init({
   'name': 'backend.chronobank.io',
   'brand': 'Chronobank.io',
-  'mongo': process.env.MONGO_URI || "mongodb://localhost:27017/backend-chronobank-io",
+  'mongo': config.get('storage.url'),
 
   'sass': 'public',
   'static': 'public',
@@ -23,6 +23,9 @@ keystone.init({
   'session': true,
   'auth': true,
   'user model': 'User',
+
+  'cookie secret': config.get('keystone.cookieSecret'),
+  'cloudinary config': config.get('cloudinary.url'),
 })
 
 // Load your project's Models
@@ -49,9 +52,8 @@ keystone.set('nav', {
   general: ['stories', 'features', 'statistics', 'headers', 'iterations'],
   products: ['products', 'product-downloads', 'product-distros', 'product-features'],
   faq: ['faq-topics', 'faq-questions'],
-  media: ['posts', 'post-categories', 'articles', 'galleries'],
+  media: ['posts', 'post-categories', 'articles', 'galleries', 'gallery-images'],
   references: ['testimonials', 'partners', 'members', 'jobs'],
-  // galleries: 'galleries',
   enquiries: ['enquiries', 'applications', 'subscriptions'],
   users: 'users',
 })

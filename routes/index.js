@@ -1,6 +1,8 @@
 const keystone = require('keystone')
+const config = require('config')
 const middleware = require('./middleware')
 const medium = require('./medium')
+const { Message, notifyAboutEnquiry } = require('../mail')
 const restful = require('restful-keystone')(keystone, {
   root: '/api/v1',
 })
@@ -9,6 +11,7 @@ const Gallery = keystone.list('Gallery')
 const Product = keystone.list('Product')
 const Enquiry = keystone.list('Enquiry')
 const Member = keystone.list('Member')
+const Partner = keystone.list('Partner')
 const Application = keystone.list('Application')
 const Subscription = keystone.list('Subscription')
 const Header = keystone.list('Header')
@@ -143,6 +146,15 @@ exports = module.exports = function (app) {
       enquiryType: 'message',
       message: body.message
     })
+
+    const { subject, content } = notifyAboutEnquiry(persisted)
+    const message = new Message({
+      to: config.get('mail.infoAddress'),
+      subject,
+      html: content
+    })
+    await message.send()
+
     res.send(persisted)
   })
 
@@ -185,6 +197,16 @@ exports = module.exports = function (app) {
       .exec()
     res.send({
       members
+    })
+  })
+
+  app.get('/api/v1/partners', async (req, res) => {
+    const partners = await Partner.model
+      .find()
+      .sort(req.query.order || 'sortOrder')
+      .exec()
+    res.send({
+      partners
     })
   })
 
@@ -231,7 +253,7 @@ exports = module.exports = function (app) {
       methods: ['list', 'retrieve']
     },
     Partner: {
-      methods: ['list', 'retrieve']
+      methods: ['retrieve']
     },
     Post: {
       methods: ['list', 'retrieve'],

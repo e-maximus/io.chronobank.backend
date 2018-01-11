@@ -1,5 +1,6 @@
 const keystone = require('keystone')
-const download = require('../utils').download.intoDirectory(process.env.UPLOAD_DIR)
+const config = require('config')
+const download = require('../utils').download.intoDirectory(config.get('uploads.dir'))
 const Types = keystone.Field.Types
 
 const Menu = new keystone.List('Menu', {
