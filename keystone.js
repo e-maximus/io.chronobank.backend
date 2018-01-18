@@ -15,7 +15,7 @@ keystone.init({
   'mongo': config.get('storage.url'),
 
   'sass': 'public',
-  'static': 'public',
+  'static': ['public', config.get('uploads.dir')],
   'favicon': 'public/favicon.ico',
   'signin logo': ['/logo.svg', 279, 33], // relative to public directory
 
