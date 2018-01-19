@@ -1,8 +1,9 @@
 const axios = require('axios')
+const config = require('config')
 const sanitizeHtml = require('sanitize-html')
 
 const solr = axios.create({
-  baseURL: process.env.SOLR_URI
+  baseURL: config.get('solr.url')
 })
 
 async function saveIndex (documents) {

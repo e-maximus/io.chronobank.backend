@@ -6,6 +6,7 @@
     "async": "2.1.4",
     "axios": "^0.17.0",
     "cloudinary": "1.7.0",
+    "config": "^1.29.1",
     "cross-env": "^5.1.0",
     "dotenv": "4.0.0",
     "express-handlebars": "3.0.0",
@@ -18,6 +19,7 @@
     "moment": "2.17.1",
     "node-sass": "4.5.0",
     "node-sass-middleware": "0.11.0",
+    "nodemailer": "^4.4.1",
     "request": "^2.83.0",
     "restful-keystone": "^0.3.0",
     "sanitize-html": "^1.14.1"
