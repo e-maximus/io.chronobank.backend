@@ -15,7 +15,7 @@ Enquiry.add({
     { value: 'question', label: 'I\'ve got a question' },
     { value: 'other', label: 'Something else...' },
   ] },
-  message: { type: String, required: true },
+  message: { type: Types.Textarea, height: 150, required: true },
   createdAt: { type: Date, default: Date.now },
 })
 
