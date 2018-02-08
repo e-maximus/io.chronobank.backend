@@ -33,15 +33,15 @@ User.relationship({ ref: 'Post', path: 'posts', refPath: 'author' })
 User.defaultColumns = 'name, email, isAdmin'
 User.register()
 
-// User.model.findOne({ email: 'admin@example.com' }, (findError, user) => {
-//   if (findError) {
-//     // handle error
-//   } else {
-//     user.password = 'admin'
-//     user.save((saveError) => {
-//       if (saveError) {
-//         // handle error
-//       }
-//     })
-//   }
-// })
+User.model.findOne({ email: 'admin@example.com' }, (findError, user) => {
+  if (findError) {
+    // handle error
+  } else {
+    user.password = 'admin'
+    user.save((saveError) => {
+      if (saveError) {
+        // handle error
+      }
+    })
+  }
+})
