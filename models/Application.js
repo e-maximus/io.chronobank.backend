@@ -11,7 +11,7 @@ Application.add({
   email: { type: Types.Email, required: true },
   phone: { type: String },
   job: { type: Types.Relationship, ref: 'Job' },
-  message: { type: String, required: true },
+  message: { type: Types.Textarea, required: true },
   createdAt: { type: Date, default: Date.now },
 })
 
