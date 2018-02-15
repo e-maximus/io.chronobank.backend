@@ -36,13 +36,27 @@ const withTranslation = (...languages) => (schema) => {
 
 const LANGUAGE_CN = new Language('cn', 'Chinese')
 const LANGUAGE_RU = new Language('ru', 'Russian')
-const LANGUAGE_DE = new Language('de', 'Deutsch')
+const LANGUAGE_DE = new Language('de', 'German')
+const LANGUAGE_KO = new Language('ko', 'Korean')
+const LANGUAGE_JA = new Language('ja', 'Japanese')
+const LANGUAGE_MS = new Language('ms', 'Malaysia')
+const LANGUAGE_TH = new Language('th', 'Thai')
+const LANGUAGE_ES = new Language('es', 'Spanish')
+const LANGUAGE_VI = new Language('vi', 'Vietnamese')
+const LANGUAGE_AR = new Language('ar', 'Arabian')
 
 module.exports = {
   default: withTranslation,
   all: withTranslation(
     LANGUAGE_CN,
     LANGUAGE_RU,
-    LANGUAGE_DE
+    LANGUAGE_DE,
+    LANGUAGE_AR,
+    LANGUAGE_VI,
+    LANGUAGE_ES,
+    LANGUAGE_TH,
+    LANGUAGE_MS,
+    LANGUAGE_JA,
+    LANGUAGE_KO,
   )
 }

@@ -1,7 +1,7 @@
 const keystone = require('keystone')
 const config = require('config')
 const download = require('../utils').download.intoDirectory(config.get('uploads.dir'))
-const withTranslation = require('../utils').withTranslation
+const { withTranslation, applyTranslationHook } = require('../utils')
 const Types = keystone.Field.Types
 
 const Story = new keystone.List('Story', {
@@ -32,17 +32,7 @@ Story.add({
   })
 )
 
-Story.schema.pre('save', function (next) {
-  const i18n = {}
-  for (const [k, v] of Object.entries(this.i18n.toJSON())) {
-    if (v && v.active) {
-      i18n[k] = v
-    }
-  }
-  this.i18n = i18n
-  this.i18nTranslations = Object.keys(i18n).join(', ')
-  next()
-})
+applyTranslationHook(Story.schema)
 
 Story.defaultColumns = 'title, image, legend, i18nTranslations'
 
