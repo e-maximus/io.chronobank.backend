@@ -27,6 +27,7 @@ Story.add({
 },
   'Internationalization',
   withTranslation.all({
+    title: { type: String, label: 'Title' },
     legend: { type: String, label: 'Legend' },
     brief: { type: Types.Html, wysiwyg: true, label: 'Brief', height: 150 }
   })
