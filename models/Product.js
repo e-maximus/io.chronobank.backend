@@ -1,6 +1,7 @@
 const keystone = require('keystone')
 const config = require('config')
 const download = require('../utils').download.intoDirectory(config.get('uploads.dir'))
+const { withTranslation, applyTranslationHook } = require('../utils')
 const Types = keystone.Field.Types
 
 const Product = new keystone.List('Product', {
@@ -29,9 +30,18 @@ Product.add({
   downloads: { type: Types.Relationship, ref: 'ProductDownload', many: true },
   distros: { type: Types.Relationship, ref: 'ProductDistro', many: true },
   features: { type: Types.Relationship, ref: 'ProductFeature', many: true }
-})
+},
+  'Internationalization',
+  withTranslation.all({
+    title: { type: String, label: 'Title' },
+    mission: { type: Types.Html, wysiwyg: true, label: 'Mission', height: 150 }
+    brief: { type: Types.Html, wysiwyg: true, label: 'Brief', height: 150 },
+  })
+)
 
-Product.defaultColumns = 'title, name, icon, image'
+applyTranslationHook(Product.schema)
+
+Product.defaultColumns = 'title, name, icon, image, i18nTranslations'
 
 Product.schema.post('save', async (d) => {
   await Promise.all([d.icon, d.icon2x, d.image, d.image2x]
