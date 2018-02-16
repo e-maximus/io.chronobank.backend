@@ -34,7 +34,7 @@ Product.add({
   'Internationalization',
   withTranslation.all({
     title: { type: String, label: 'Title' },
-    mission: { type: Types.Html, wysiwyg: true, label: 'Mission', height: 150 }
+    mission: { type: Types.Html, wysiwyg: true, label: 'Mission', height: 150 },
     brief: { type: Types.Html, wysiwyg: true, label: 'Brief', height: 150 },
   })
 )
