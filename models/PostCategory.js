@@ -15,7 +15,7 @@ PostCategory.add({
 },
   'Internationalization',
   withTranslation.all({
-    title: { type: String, label: 'Title' },
+    name: { type: String, label: 'Name' },
   })
 )
 
