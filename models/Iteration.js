@@ -2,6 +2,7 @@ const keystone = require('keystone')
 const config = require('config')
 const download = require('../utils').download.intoDirectory(config.get('uploads.dir'))
 const Types = keystone.Field.Types
+const { withTranslation, applyTranslationHook } = require('../utils')
 
 const Iteration = new keystone.List('Iteration', {
   map: { name: 'title' },
@@ -14,9 +15,17 @@ Iteration.add({
   date: { type: Types.Date, index: true },
   image: { type: Types.CloudinaryImage },
   brief: { type: Types.Html, wysiwyg: true, height: 150 }
-})
+},
+  'Internationalization',
+  withTranslation.all({
+    title: { type: String, label: 'Title' },
+    brief: { type: Types.Html, wysiwyg: true, label: 'Brief', height: 150 }
+  })
+)
 
-Iteration.defaultColumns = 'title, image, date'
+applyTranslationHook(Iteration.schema)
+
+Iteration.defaultColumns = 'title, image, date, i18nTranslations'
 
 Iteration.schema.post('save', async (d) => {
   if (d.image && d.image.secure_url) {

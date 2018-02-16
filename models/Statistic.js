@@ -2,6 +2,7 @@ const keystone = require('keystone')
 const config = require('config')
 const download = require('../utils').download.intoDirectory(config.get('uploads.dir'))
 const Types = keystone.Field.Types
+const { withTranslation, applyTranslationHook } = require('../utils')
 
 const Statistic = new keystone.List('Statistic', {
   map: { name: 'title' },
@@ -13,9 +14,17 @@ Statistic.add({
   title: { type: String, required: true },
   image: { type: Types.CloudinaryImage },
   brief: { type: Types.Html, wysiwyg: true, height: 150 }
-})
+},
+  'Internationalization',
+  withTranslation.all({
+    title: { type: String, label: 'Title' },
+    brief: { type: Types.Html, wysiwyg: true, label: 'Brief', height: 150 }
+  })
+)
 
-Statistic.defaultColumns = 'title, image'
+applyTranslationHook(Statistic.schema)
+
+Statistic.defaultColumns = 'title, image, i18nTranslations'
 
 Statistic.schema.post('save', async (d) => {
   if (d.image && d.image.secure_url) {

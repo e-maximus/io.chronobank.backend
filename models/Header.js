@@ -2,6 +2,7 @@ const keystone = require('keystone')
 const config = require('config')
 const download = require('../utils').download.intoDirectory(config.get('uploads.dir'))
 const Types = keystone.Field.Types
+const { withTranslation, applyTranslationHook } = require('../utils')
 
 const Header = new keystone.List('Header', {
   map: { name: 'title' },
@@ -30,7 +31,14 @@ Header.add({
   image2x640: { type: Types.CloudinaryImage },
   video: { type: Types.Url },
   brief: { type: Types.Html, wysiwyg: true, height: 300 },
-})
+},
+  'Internationalization',
+  withTranslation.all({
+    brief: { type: Types.Html, wysiwyg: true, label: 'Brief', height: 300 }
+  })
+)
+
+applyTranslationHook(Header.schema)
 
 Header.schema.post('save', async (d) => {
   await Promise.all([d.image, d.image320, d.image480, d.image640, d.image2x, d.image2x320, d.image2x480, d.image2x640]
