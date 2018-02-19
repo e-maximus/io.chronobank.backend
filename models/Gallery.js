@@ -1,5 +1,4 @@
 const keystone = require('keystone')
-const { withTranslation, applyTranslationHook } = require('../utils')
 
 const Gallery = new keystone.List('Gallery', {
   map: { name: 'name' },
@@ -10,14 +9,7 @@ const Gallery = new keystone.List('Gallery', {
 Gallery.add({
   name: { type: String, required: true },
   publishedDate: { type: Date, default: Date.now }
-},
-  'Internationalization',
-  withTranslation.all({
-    title: { type: String, label: 'Title' },
-  })
-)
-
-applyTranslationHook(Gallery.schema)
+})
 
 Gallery.schema.virtual('images', {
   ref: 'GalleryImage',
