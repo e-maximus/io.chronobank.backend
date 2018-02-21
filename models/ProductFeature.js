@@ -1,6 +1,7 @@
 const keystone = require('keystone')
 const config = require('config')
 const download = require('../utils').download.intoDirectory(config.get('uploads.dir'))
+const { withTranslation, applyTranslationHook } = require('../utils')
 const Types = keystone.Field.Types
 
 const ProductFeature = new keystone.List('ProductFeature', {
@@ -14,7 +15,13 @@ ProductFeature.add({
   title: { type: String },
   image: { type: Types.CloudinaryImage },
   image2x: { type: Types.CloudinaryImage }
-})
+},
+  'Internationalization',
+  withTranslation.all({
+    title: { type: String, label: 'Title' },
+  })
+)
+applyTranslationHook(ProductFeature.schema)
 
 ProductFeature.relationship({ ref: 'Product', path: 'product', refPath: 'features' })
 

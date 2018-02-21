@@ -1,6 +1,7 @@
 const keystone = require('keystone')
 const config = require('config')
 const download = require('../utils').download.intoDirectory(config.get('uploads.dir'))
+const { withTranslation, applyTranslationHook } = require('../utils')
 const Types = keystone.Field.Types
 
 const ProductDistro = new keystone.List('ProductDistro', {
@@ -18,11 +19,18 @@ ProductDistro.add({
   ]},
   icon: { type: Types.CloudinaryImage },
   url: { type: Types.Url }
-})
+},
+  'Internationalization',
+  withTranslation.all({
+    title: { type: String, label: 'Title' },
+  })
+)
+
+applyTranslationHook(ProductDistro.schema)
 
 ProductDistro.relationship({ ref: 'Product', path: 'product', refPath: 'distros' })
 
-ProductDistro.defaultColumns = 'title, icon, type, url'
+ProductDistro.defaultColumns = 'title, icon, type, url, i18nTranslations'
 
 ProductDistro.schema.post('save', async (d) => {
   if (d.icon && d.icon.secure_url) {
