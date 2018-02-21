@@ -2,6 +2,7 @@ const keystone = require('keystone')
 const config = require('config')
 const download = require('../utils').download.intoDirectory(config.get('uploads.dir'))
 const Types = keystone.Field.Types
+const { withTranslation, applyTranslationHook } = require('../utils')
 
 const Member = new keystone.List('Member', {
   map: { name: 'name' },
@@ -15,9 +16,18 @@ Member.add({
   avatar2x: { type: Types.CloudinaryImage },
   position: { type: String },
   brief: { type: Types.Html, wysiwyg: true, height: 150 }
-})
+},
+  'Internationalization',
+  withTranslation.all({
+    name: { type: String, label: 'Name' },
+    position: { type: String, label: 'Position' },
+    brief: { type: Types.Html, wysiwyg: true, label: 'Brief', height: 150 }
+  })
+)
 
-Member.defaultColumns = 'name, avatar, position'
+applyTranslationHook(Member.schema)
+
+Member.defaultColumns = 'name, avatar, position, i18nTranslations'
 
 Member.schema.post('save', async (d) => {
   await Promise.all([d.avatar, d.avatar2x]

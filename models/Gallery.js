@@ -1,5 +1,4 @@
 const keystone = require('keystone')
-const { withTranslation, applyTranslationHook } = require('../utils')
 
 const Gallery = new keystone.List('Gallery', {
   map: { name: 'name' },

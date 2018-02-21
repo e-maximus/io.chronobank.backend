@@ -1,7 +1,6 @@
 const keystone = require('keystone')
 const config = require('config')
 const download = require('../utils').download.intoDirectory(config.get('uploads.dir'))
-const { withTranslation, applyTranslationHook } = require('../utils')
 const Types = keystone.Field.Types
 
 const GalleryImage = new keystone.List('GalleryImage', {
@@ -14,16 +13,9 @@ GalleryImage.add({
   title: { type: String, initial: true, required: true },
   gallery: { type: Types.Relationship, ref: 'Gallery', initial: true, required: true },
   image: { type: Types.CloudinaryImage, initial: true, required: true }
-},
-  'Internationalization',
-  withTranslation.all({
-    title: { type: String, label: 'Title' },
-  })
-)
+})
 
-applyTranslationHook(GalleryImage.schema)
-
-GalleryImage.defaultColumns = 'title, gallery, image, i18nTranslations'
+GalleryImage.defaultColumns = 'title, gallery, image'
 
 GalleryImage.schema.post('save', async (d) => {
   if (d.image && d.image.secure_url) {

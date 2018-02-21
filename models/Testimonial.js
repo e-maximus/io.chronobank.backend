@@ -2,6 +2,7 @@ const keystone = require('keystone')
 const config = require('config')
 const download = require('../utils').download.intoDirectory(config.get('uploads.dir'))
 const Types = keystone.Field.Types
+const { withTranslation, applyTranslationHook } = require('../utils')
 
 const Testimonial = new keystone.List('Testimonial', {
   map: { name: 'name' },
@@ -17,9 +18,18 @@ Testimonial.add({
   image448: { type: Types.CloudinaryImage },
   image2x448: { type: Types.CloudinaryImage },
   brief: { type: Types.Html, wysiwyg: true, height: 150 }
-})
+},
+  'Internationalization',
+  withTranslation.all({
+    name: { type: String, label: 'Name' },
+    position: { type: String, label: 'Position' },
+    brief: { type: Types.Html, wysiwyg: true, label: 'Brief', height: 150 }
+  })
+)
 
-Testimonial.defaultColumns = 'name, position, image'
+applyTranslationHook(Testimonial.schema)
+
+Testimonial.defaultColumns = 'name, position, image, i18nTranslations'
 
 Testimonial.schema.post('save', async (d) => {
   await Promise.all([d.image, d.image2x, d.image448, d.image2x448]
