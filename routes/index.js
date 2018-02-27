@@ -19,6 +19,7 @@ const Story = keystone.list('Story')
 const FaqTopic = keystone.list('FaqTopic')
 const FaqQuestion = keystone.list('FaqQuestion')
 const Menu = keystone.list('Menu')
+const Constant = keystone.list('Constant')
 
 const FaqQuestionIndex = require('../index/FaqQuestionIndex')
 
@@ -114,6 +115,13 @@ exports = module.exports = function (app) {
     res.send({
       headers
     })
+  })
+
+  app.get('/api/v1/constants', async (req, res) => {
+    const constants = await Constant.model
+      .find()
+      .exec()
+    res.send({constants})
   })
 
   app.get('/api/v1/stories/s/:slug', async (req, res) => {
@@ -229,6 +237,9 @@ exports = module.exports = function (app) {
       methods: ['list', 'retrieve']
     },
     Contact: {
+      methods: ['list', 'retrieve']
+    },
+    Constant: {
       methods: ['list', 'retrieve']
     },
     Feature: {

@@ -1,6 +1,7 @@
 const keystone = require('keystone')
 const FaqQuestionIndex = require('../index/FaqQuestionIndex')
 const Types = keystone.Field.Types
+const { withTranslation, applyTranslationHook } = require('../utils')
 
 const FaqQuestion = new keystone.List('FaqQuestion', {
   map: { name: 'name' },
@@ -13,9 +14,17 @@ FaqQuestion.add({
   title: { type: String },
   topic: { type: Types.Relationship, ref: 'FaqTopic' },
   brief: { type: Types.Html, wysiwyg: true, height: 350 },
-})
+},
+  'Internationalization',
+  withTranslation.all({
+    title: { type: String, label: 'Title' },
+    brief: { type: Types.Html, wysiwyg: true, label: 'Brief', height: 150 }
+  })
+)
 
-FaqQuestion.defaultColumns = 'name|20%, title, topic|20%'
+applyTranslationHook(FaqQuestion.schema)
+
+FaqQuestion.defaultColumns = 'name|20%, title, topic|20%, i18nTranslations|%20'
 
 
 FaqQuestion.schema.post('save', async (d) => {

@@ -53,7 +53,7 @@ keystone.set('nav', {
   products: ['products', 'product-downloads', 'product-distros', 'product-features'],
   faq: ['faq-topics', 'faq-questions'],
   media: ['posts', 'post-categories', 'articles', 'galleries', 'gallery-images'],
-  references: ['testimonials', 'partners', 'members', 'jobs'],
+  references: ['testimonials', 'partners', 'members', 'jobs', 'constants'],
   enquiries: ['enquiries', 'applications', 'subscriptions'],
   users: 'users',
 })
