@@ -20,6 +20,7 @@ const FaqTopic = keystone.list('FaqTopic')
 const FaqQuestion = keystone.list('FaqQuestion')
 const Menu = keystone.list('Menu')
 const Constant = keystone.list('Constant')
+const Title = keystone.list('Title')
 
 const FaqQuestionIndex = require('../index/FaqQuestionIndex')
 
@@ -122,6 +123,13 @@ exports = module.exports = function (app) {
       .find()
       .exec()
     res.send({constants})
+  })
+
+  app.get('/api/v1/titles', async (req, res) => {
+    const titles = await Title.model
+      .find()
+      .exec()
+    res.send({titles})
   })
 
   app.get('/api/v1/stories/s/:slug', async (req, res) => {
