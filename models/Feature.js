@@ -17,6 +17,7 @@ Feature.add({
 },
   'Internationalization',
   withTranslation.all({
+    title: { type: String, label: 'Title' },
     brief: { type: Types.Html, wysiwyg: true, label: 'Brief', height: 150 }
   })
   

@@ -1,5 +1,7 @@
 const keystone = require('keystone')
 // const Types = keystone.Field.Types
+const { withTranslation, applyTranslationHook } = require('../utils')
+
 
 const FaqTopic = new keystone.List('FaqTopic', {
   map: { name: 'name' },
@@ -10,7 +12,14 @@ const FaqTopic = new keystone.List('FaqTopic', {
 FaqTopic.add({
   name: { type: String, required: true },
   title: { type: String }
-})
+},
+  'Internationalization',
+  withTranslation.all({
+    title: { type: String, label: 'Title' },
+  })
+)
+
+applyTranslationHook(FaqTopic.schema)
 
 FaqTopic.schema.virtual('questions', {
   ref: 'FaqQuestion',
