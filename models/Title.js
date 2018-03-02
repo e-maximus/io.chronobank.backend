@@ -13,7 +13,7 @@ Title.add({
   value: { type: Types.Html, wysiwyg: true, height: 150 },
 },
   'Internationalization',
-  withTranslation.all({
+  withTranslation.withAllTranslations({
     value: { type: Types.Html, wysiwyg: true, height: 150, label: 'Value' },
   })
 )

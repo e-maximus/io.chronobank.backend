@@ -16,7 +16,7 @@ ProductDownload.add({
   url: { type: Types.Url }
 },
   'Internationalization',
-  withTranslation.all({
+  withTranslation.withAllTranslations({
     title: { type: String, label: 'Title' },
   })
 )

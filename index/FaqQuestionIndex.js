@@ -1,6 +1,7 @@
 const axios = require('axios')
 const config = require('config')
 const sanitizeHtml = require('sanitize-html')
+const { withTranslation } = require('../utils')
 
 const solr = axios.create({
   baseURL: config.get('solr.url')
@@ -15,6 +16,13 @@ async function saveIndex (documents) {
     brief_txt_en: sanitizeHtml(d.brief, {
       allowedTags: [],
       allowedAttributes: []
+    }),
+    ...withTranslation.withAllSolrIndices(d, {
+      title: (override) => override.title,
+      brief: (override) => sanitizeHtml(override.brief, {
+        allowedTags: [],
+        allowedAttributes: []
+      })
     })
   })))
 }
@@ -34,9 +42,10 @@ async function clearIndex () {
 }
 
 async function search (
-  { query = '*', topic = null, offset = 0, limit = 10 } =
-  { query: '*', topic: null, offset: 0, limit: 10}
+  { locale = 'en', query = '*', topic = null, offset = 0, limit = 10 } =
+  { locale: 'en', query: '*', topic: null, offset: 0, limit: 10}
 ) {
+  const lang = withTranslation.LANGUAGES_MAP[locale] || withTranslation.LANGUAGES_MAP['en']
   const pattern = /([\!\*\+\-\=\<\>\&\|\(\)\[\]\{\}\^\~\?\:\"])/g
   const params = {
     defType: 'edismax',
@@ -44,7 +53,7 @@ async function search (
     fq: !topic
       ? null
       : (Array.isArray(topic) ? topic : [ topic ]).map(c => `(topic_s:${c})`).join(' OR '),
-    qf: 'title_txt_en^3 brief_txt_en^2',
+    qf: `title_${lang.name}_${lang.solrTypeSuffix}^3 brief_${lang.name}_${lang.solrTypeSuffix}^2`,
     fl: '*,score',
     start: offset,
     rows: limit

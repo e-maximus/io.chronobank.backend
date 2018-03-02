@@ -14,7 +14,7 @@ Job.add({
   details: { type: Types.Html, wysiwyg: true, height: 250 }
 },
   'Internationalization',
-  withTranslation.all({
+  withTranslation.withAllTranslations({
     title: { type: String, label: 'Title' },
     brief: { type: Types.Html, wysiwyg: true, label: 'Brief', height: 150 },
     details: { type: Types.Html, wysiwyg: true, label: 'Details', height: 250 }

@@ -12,7 +12,7 @@ Constants.add({
   value: { type: String }
 },
   'Internationalization',
-  withTranslation.all({
+  withTranslation.withAllTranslations({
     value: { type: String, label: 'Value' },
   })
 )

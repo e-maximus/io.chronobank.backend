@@ -32,7 +32,7 @@ Product.add({
   features: { type: Types.Relationship, ref: 'ProductFeature', many: true }
 },
   'Internationalization',
-  withTranslation.all({
+  withTranslation.withAllTranslations({
     title: { type: String, label: 'Title' },
     mission: { type: Types.Html, wysiwyg: true, label: 'Mission', height: 150 },
     brief: { type: Types.Html, wysiwyg: true, label: 'Brief', height: 150 },
