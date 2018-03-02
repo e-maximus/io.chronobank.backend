@@ -58,8 +58,8 @@ exports.create = {
     },
     {
       "name": "We are making revolution for the recruitment industry text",
-      "value": "ChronoBank’s vision is to create a peer-to-marketplace for short-term recruitment in which there are no unnecessary costs and no arbitrary gatekeepers. We believe that blockchain technology is the key to unlocking this new world of employment opportunities that anyone can access, wherever they are in the world, and make sure they get paid promptly and fairly. We want to pioneer best practice in both the blockchain and labour-hire industries, and work with a range of highly-qualified partners to ensure our solution is secure, robust and                       user-friendly for all."
+      "value": "ChronoBank’s vision is to create a peer-to-marketplace for short-term recruitment in which there are no unnecessary costs and no arbitrary gatekeepers. We believe that blockchain technology is the key to unlocking this new world of employment opportunities that anyone can access, wherever they are in the world, and make sure they get paid promptly and fairly. We want to pioneer best practice in both the blockchain and labour-hire industries, and work with a range of highly-qualified partners to ensure our solution is secure, robust and user-friendly for all."
     },
-    {"name": "Read bio", "value": "Read bio"}
+    {"name": "Read bio", "value": "Read bio" }
   ]
 }
