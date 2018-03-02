@@ -14,7 +14,7 @@ FaqTopic.add({
   title: { type: String }
 },
   'Internationalization',
-  withTranslation.all({
+  withTranslation.withAllTranslations({
     title: { type: String, label: 'Title' },
   })
 )

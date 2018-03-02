@@ -16,7 +16,7 @@ Statistic.add({
   brief: { type: Types.Html, wysiwyg: true, height: 150 }
 },
   'Internationalization',
-  withTranslation.all({
+  withTranslation.withAllTranslations({
     title: { type: String, label: 'Title' },
     brief: { type: Types.Html, wysiwyg: true, label: 'Brief', height: 150 }
   })

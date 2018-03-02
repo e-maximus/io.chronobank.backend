@@ -17,7 +17,7 @@ ProductFeature.add({
   image2x: { type: Types.CloudinaryImage }
 },
   'Internationalization',
-  withTranslation.all({
+  withTranslation.withAllTranslations({
     title: { type: String, label: 'Title' },
   })
 )

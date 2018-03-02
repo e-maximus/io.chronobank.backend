@@ -33,7 +33,7 @@ Header.add({
   brief: { type: Types.Html, wysiwyg: true, height: 300 },
 },
   'Internationalization',
-  withTranslation.all({
+  withTranslation.withAllTranslations({
     brief: { type: Types.Html, wysiwyg: true, label: 'Brief', height: 300 }
   })
 )
