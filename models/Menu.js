@@ -2,6 +2,7 @@ const keystone = require('keystone')
 const config = require('config')
 const download = require('../utils').download.intoDirectory(config.get('uploads.dir'))
 const Types = keystone.Field.Types
+const { withTranslation, applyTranslationHook } = require('../utils')
 
 const Menu = new keystone.List('Menu', {
   map: { name: 'title' },
@@ -19,9 +20,17 @@ Menu.add({
 }, 'Display Options', {
   isVisibleInHeader: { type: Boolean, label: 'Show in the Header section' },
   isVisibleInFooter: { type: Boolean, label: 'Show in the Footer section' }
-})
+},
+  'Internationalization',
+  withTranslation.all({
+    title: { type: String, label: 'Title' },
+    subtitle: { type: String, label: 'Subtitle' },
+  })
+)
 
 Menu.relationship({ ref: 'Menu', path: 'parent', refPath: 'children' })
+
+applyTranslationHook(Menu.schema)
 
 Menu.defaultColumns = 'title, symbol, icon32x32, icon40x40, isVisibleInHeader, isVisibleInFooter, url'
 

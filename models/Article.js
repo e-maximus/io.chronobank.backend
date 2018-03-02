@@ -1,6 +1,7 @@
 const keystone = require('keystone')
 const config = require('config')
 const download = require('../utils').download.intoDirectory(config.get('uploads.dir'))
+const { withTranslation, applyTranslationHook } = require('../utils')
 const Types = keystone.Field.Types
 
 const Article = new keystone.List('Article', {
@@ -16,9 +17,17 @@ Article.add({
   icon: { type: Types.CloudinaryImage },
   icon2x: { type: Types.CloudinaryImage },
   brief: { type: Types.Html, wysiwyg: true, height: 150 }
-})
+},
+  'Internationalization',
+  withTranslation.all({
+    title: { type: String, label: 'Title' },
+    brief: { type: Types.Html, wysiwyg: true, label: 'Brief', height: 150 }
+  })
+)
 
-Article.defaultColumns = 'title, icon, source, url'
+applyTranslationHook(Article.schema)
+
+Article.defaultColumns = 'title, icon, source, url, i18nTranslations'
 
 Article.schema.post('save', async (d) => {
   await Promise.all([d.icon, d.icon2x]
