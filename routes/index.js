@@ -16,6 +16,7 @@ const Application = keystone.list('Application')
 const Subscription = keystone.list('Subscription')
 const Header = keystone.list('Header')
 const Story = keystone.list('Story')
+const Language = keystone.list('Language')
 const FaqTopic = keystone.list('FaqTopic')
 const FaqQuestion = keystone.list('FaqQuestion')
 const Menu = keystone.list('Menu')
@@ -123,6 +124,14 @@ exports = module.exports = function (app) {
       .find()
       .exec()
     res.send({constants})
+  })
+  
+  app.get('/api/v1/languages', async (req, res) => {
+    const languages = await Language.model
+      .find()
+      .where('isEnable', true)
+      .exec()
+    res.send({languages})
   })
 
   app.get('/api/v1/titles', async (req, res) => {
@@ -254,6 +263,9 @@ exports = module.exports = function (app) {
       methods: ['list', 'retrieve']
     },
     Job: {
+      methods: ['list', 'retrieve']
+    },
+    Language: {
       methods: ['list', 'retrieve']
     },
     Header: {
