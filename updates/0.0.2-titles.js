@@ -15,6 +15,12 @@ exports.create = {
     }, {
       "name": "What is ChronoBank.io description",
       "value": "<p>ChronoBank.io is an ambitious and wide-ranging blockchain project, aimed at disrupting the HR/recruitment/finance industries in a similar way to how Uber disrupted the taxi business and how Upwork represented an evolution in freelancing.</p>"
+    }, {
+      "name": "Contact us",
+      "value": "<h3>Contact us</h3>"
+    }, {
+      "name": "Get in touch with our team",
+      "value": "<h4>Get in touch with our team</h4>"
     }, {"name": "Latest news", "value": "<h2>Latest news</h2>"}, {
       "name": "Press",
       "value": "<h2>Press</h2>"
