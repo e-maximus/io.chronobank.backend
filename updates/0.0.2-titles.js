@@ -8,7 +8,7 @@
  */
 
 exports.create = {
-  Constant: [
+  Titles: [
     {
       "name": "What is ChronoBank.io?",
       "value": "<h2>What is ChronoBank.io?</h2>"
@@ -21,21 +21,39 @@ exports.create = {
     }, {
       "name": "Get in touch with our team",
       "value": "<h4>Get in touch with our team</h4>"
-    }, {"name": "Latest news", "value": "<h2>Latest news</h2>"}, {
+    }, {
+      "name": "Latest news",
+      "value": "<h2>Latest news</h2>"
+    }, {
       "name": "Press",
       "value": "<h2>Press</h2>"
-    }, {"name": "We are proud of our partners", "value": "<p>We are proud of our partners</p>"}, {
+    }, {
+      "name": "We are proud of our partners",
+      "value": "<p>We are proud of our partners</p>"
+    }, {
       "name": "Partners",
       "value": "<h2>Partners</h2>"
-    }, {"name": "Roadmap", "value": "<h2>Roadmap</h2>"}, {
+    }, {
+      "name": "Roadmap",
+      "value": "<h2>Roadmap</h2>"
+    }, {
       "name": "Labour–Hour Features",
       "value": "<h3>Labour&ndash;Hour Features</h3>"
-    }, {"name": "Contact us", "value": "<h3>Contact us</h3>"}, {
+    }, {
+      "name": "Contact us",
+      "value": "<h3>Contact us</h3>"
+    }, {
       "name": "ChronoBank is",
       "value": "<h2>ChronoBank is</h2>"
-    }, {"name": "Jobs at Chronobank.io", "value": "<h2>Jobs at Chronobank.io</h2>"}, {
+    }, {
+      "name": "Jobs at Chronobank.io",
+      "value": "<h2>Jobs at Chronobank.io</h2>"
+    }, {
       "name": "Key features",
       "value": "<h3>Key features</h3>"
-    }, {"name": "ChronoMint downloads", "value": "<h2>ChronoMint downloads</h2>"}
+    }, {
+      "name": "ChronoMint downloads",
+      "value": "<h2>ChronoMint downloads</h2>"
+  }
   ]
 }
