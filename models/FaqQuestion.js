@@ -16,7 +16,7 @@ FaqQuestion.add({
   brief: { type: Types.Html, wysiwyg: true, height: 350 },
 },
   'Internationalization',
-  withTranslation.all({
+  withTranslation.withAllTranslations({
     title: { type: String, label: 'Title' },
     brief: { type: Types.Html, wysiwyg: true, label: 'Brief', height: 150 }
   })

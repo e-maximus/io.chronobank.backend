@@ -4,7 +4,7 @@ const applyTranslationHook = (schema) => {
     return
   }
 
-  schema.pre('save', function(next){
+  schema.pre('save', function (next){
     const i18n = {}
     for (const [k, v] of Object.entries(this.i18n.toJSON())) {
       if (v && v.active) {

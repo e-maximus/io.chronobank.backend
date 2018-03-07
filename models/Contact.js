@@ -19,7 +19,7 @@ Contact.add({
   isVisibleInFooter: { type: Boolean, label: 'Show in the Footer section' }
 },
   'Internationalization',
-  withTranslation.all({
+  withTranslation.withAllTranslations({
     title: { type: String, label: 'Title' }
   })
 )

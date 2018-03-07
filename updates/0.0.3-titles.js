@@ -8,7 +8,7 @@
  */
 
 exports.create = {
-  Titles: [
+  Title: [
     {
       "name": "What is ChronoBank.io?",
       "value": "<h2>What is ChronoBank.io?</h2>"
@@ -54,6 +54,6 @@ exports.create = {
     }, {
       "name": "ChronoMint downloads",
       "value": "<h2>ChronoMint downloads</h2>"
-  }
+    }
   ]
 }

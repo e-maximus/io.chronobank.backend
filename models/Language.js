@@ -15,7 +15,7 @@ Language.add({
   key: {type: String, noedit: true}
 },
   'Internationalization',
-  withTranslation.all({
+  withTranslation.withAllTranslations({
     label: {type: String, label: 'Label'}
   }),
   'Display Options', {
