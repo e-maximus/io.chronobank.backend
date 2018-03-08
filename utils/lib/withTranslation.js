@@ -35,6 +35,7 @@ const withTranslation = (...languages) => (schema) => {
   return target
 }
 
+const LANGUAGE_EN = new Language('en', 'English', 'txt_en')
 const LANGUAGE_CN = new Language('cn', 'Chinese', 'txt_cjk')
 const LANGUAGE_RU = new Language('ru', 'Russian', 'txt_ru')
 const LANGUAGE_DE = new Language('de', 'German', 'txt_de')
@@ -47,6 +48,7 @@ const LANGUAGE_VI = new Language('vi', 'Vietnamese', 'txt')
 const LANGUAGE_AR = new Language('ar', 'Arabian', 'txt_ar')
 
 const LANGUAGES_ARRAY = [
+  LANGUAGE_EN,
   LANGUAGE_CN,
   LANGUAGE_RU,
   LANGUAGE_DE,
@@ -88,5 +90,5 @@ module.exports = {
   withTranslation,
   withSolrIndex,
   withAllSolrIndices: withSolrIndex(...LANGUAGES_ARRAY),
-  withAllTranslations: withTranslation(...LANGUAGES_ARRAY),
+  withAllTranslations: withTranslation(...LANGUAGES_ARRAY.filter(l => l !== LANGUAGE_EN)),
 }
