@@ -11,49 +11,58 @@ exports.create = {
   Title: [
     {
       "name": "What is ChronoBank.io?",
-      "value": "<h2>What is ChronoBank.io?</h2>"
-    }, {
-      "name": "What is ChronoBank.io description",
-      "value": "<p>ChronoBank.io is an ambitious and wide-ranging blockchain project, aimed at disrupting the HR/recruitment/finance industries in a similar way to how Uber disrupted the taxi business and how Upwork represented an evolution in freelancing.</p>"
+      "stereotype": "h2",
+      "title": "What is ChronoBank.io?",
+      "subtitle": "ChronoBank.io is an ambitious and wide-ranging blockchain project, aimed at disrupting the HR/recruitment/finance industries in a similar way to how Uber disrupted the taxi business and how Upwork represented an evolution in freelancing."
     }, {
       "name": "Contact us",
-      "value": "<h3>Contact us</h3>"
+      "stereotype": "h3",
+      "title": "Contact us"
     }, {
       "name": "Get in touch with our team",
-      "value": "<h4>Get in touch with our team</h4>"
+      "stereotype": "h4",
+      "title": "Get in touch with our team"
     }, {
       "name": "Latest news",
-      "value": "<h2>Latest news</h2>"
+      "stereotype": "h2",
+      "title": "Latest news"
     }, {
       "name": "Press",
-      "value": "<h2>Press</h2>"
-    }, {
-      "name": "We are proud of our partners",
-      "value": "<p>We are proud of our partners</p>"
+      "stereotype": "h2",
+      "title": "Press"
     }, {
       "name": "Partners",
-      "value": "<h2>Partners</h2>"
+      "stereotype": "h2",
+      "title": "Partners",
+      "subtitle": "We are proud of our partners"
     }, {
       "name": "Roadmap",
-      "value": "<h2>Roadmap</h2>"
+      "stereotype": "h2",
+      "title": "Roadmap"
     }, {
       "name": "Labour–Hour Features",
-      "value": "<h3>Labour&ndash;Hour Features</h3>"
+      "stereotype": "h3",
+      "title": "Labour&ndash;Hour Features"
     }, {
       "name": "Contact us",
-      "value": "<h3>Contact us</h3>"
+      "stereotype": "h3",
+      "title": "Contact us"
     }, {
       "name": "ChronoBank is",
-      "value": "<h2>ChronoBank is</h2>"
+      "stereotype": "h2",
+      "title": "ChronoBank is"
     }, {
       "name": "Jobs at Chronobank.io",
-      "value": "<h2>Jobs at Chronobank.io</h2>"
+      "stereotype": "h2",
+      "title": "Jobs at Chronobank.io"
     }, {
       "name": "Key features",
-      "value": "<h3>Key features</h3>"
+      "stereotype": "h3",
+      "title": "Key features"
     }, {
       "name": "ChronoMint downloads",
-      "value": "<h2>ChronoMint downloads</h2>"
+      "stereotype": "h2",
+      "title": "ChronoMint downloads"
     }
   ]
 }
