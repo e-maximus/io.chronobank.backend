@@ -4,35 +4,35 @@ const download = require('../utils').download.intoDirectory(config.get('uploads.
 const { withTranslation, applyTranslationHook } = require('../utils')
 const Types = keystone.Field.Types
 
-const ProductFeature = new keystone.List('ProductFeature', {
+const ProductDescription = new keystone.List('ProductDescription', {
   map: { name: 'name' },
   autokey: { path: 'slug', from: 'name', unique: true },
   sortable: true
 })
 
-ProductFeature.add({
+ProductDescription.add({
   name: { type: String, required: true },
   title: { type: String },
-  image: { type: Types.CloudinaryImage },
-  image2x: { type: Types.CloudinaryImage },
-  brief: { type: String }
+  subtitle: { type: Types.Html, wysiwyg: true, height: 150 },
+  details: { type: Types.Html, wysiwyg: true, height: 150 }
 },
   'Internationalization',
   withTranslation.withAllTranslations({
     title: { type: String, label: 'Title' },
-    brief: { type: String, label: 'Brief' },
+    subtitle: { type: Types.Html, wysiwyg: true, height: 150 },
+    details: { type: Types.Html, wysiwyg: true, height: 150 }
   })
 )
-applyTranslationHook(ProductFeature.schema)
+applyTranslationHook(ProductDescription.schema)
 
-ProductFeature.relationship({ ref: 'Product', path: 'product', refPath: 'features' })
+ProductDescription.relationship({ ref: 'Product', path: 'product', refPath: 'descriptions' })
 
-ProductFeature.schema.post('save', async (d) => {
+ProductDescription.schema.post('save', async (d) => {
   await Promise.all([d.image, d.image2x]
     .map(image => (image && image.secure_url)
       ? download(image.secure_url)
       : Promise.resolve())
-    )
+  )
 })
 
-ProductFeature.register()
+ProductDescription.register()

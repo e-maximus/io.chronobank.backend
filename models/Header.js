@@ -19,7 +19,8 @@ Header.add({
   ]},
   background: { type: Types.Select, options: [
     { value: 'dark', label: 'Dark' },
-    { value: 'light', label: 'Light' }
+    { value: 'light', label: 'Light' },
+    { value: 'middleware', label: 'Middleware' },
   ]},
   image: { type: Types.CloudinaryImage },
   image320: { type: Types.CloudinaryImage },

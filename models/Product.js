@@ -29,7 +29,12 @@ Product.add({
   brief: { type: Types.Html, wysiwyg: true, height: 300 },
   downloads: { type: Types.Relationship, ref: 'ProductDownload', many: true },
   distros: { type: Types.Relationship, ref: 'ProductDistro', many: true },
-  features: { type: Types.Relationship, ref: 'ProductFeature', many: true }
+  featuresMode: { type: Types.Select, options: [
+    { value: 'default', label: 'List' },
+    { value: 'tile', label: 'Tile' }
+  ]},
+  features: { type: Types.Relationship, ref: 'ProductFeature', many: true },
+  descriptions: { type: Types.Relationship, ref: 'ProductDescription', many: true }
 },
   'Internationalization',
   withTranslation.withAllTranslations({

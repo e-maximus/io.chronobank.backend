@@ -86,6 +86,7 @@ exports = module.exports = function (app) {
       .populate('downloads')
       .populate('distros')
       .populate('features')
+      .populate('descriptions')
       .exec()
     res.send(product)
   })
@@ -96,6 +97,7 @@ exports = module.exports = function (app) {
       .populate('downloads')
       .populate('distros')
       .populate('features')
+      .populate('descriptions')
       .exec()
     res.send({
       products
