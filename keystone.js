@@ -50,7 +50,7 @@ keystone.set('routes', require('./routes'))
 // Configure the navigation bar in Keystone's Admin UI
 keystone.set('nav', {
   general: ['stories', 'features', 'statistics', 'headers', 'iterations'],
-  products: ['products', 'product-downloads', 'product-distros', 'product-features'],
+  products: ['products', 'product-downloads', 'product-distros', 'product-features', 'product-descriptions'],
   faq: ['faq-topics', 'faq-questions'],
   media: ['posts', 'post-categories', 'articles', 'galleries', 'gallery-images'],
   references: ['testimonials', 'partners', 'exchanges', 'members', 'jobs', 'constants', 'socials', 'files', 'papers'],
