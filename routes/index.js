@@ -12,6 +12,7 @@ const Product = keystone.list('Product')
 const Enquiry = keystone.list('Enquiry')
 const Member = keystone.list('Member')
 const Partner = keystone.list('Partner')
+const Exchange = keystone.list('Exchange')
 const Application = keystone.list('Application')
 const Subscription = keystone.list('Subscription')
 const Header = keystone.list('Header')
@@ -85,6 +86,7 @@ exports = module.exports = function (app) {
       .populate('downloads')
       .populate('distros')
       .populate('features')
+      .populate('descriptions')
       .exec()
     res.send(product)
   })
@@ -95,6 +97,7 @@ exports = module.exports = function (app) {
       .populate('downloads')
       .populate('distros')
       .populate('features')
+      .populate('descriptions')
       .exec()
     res.send({
       products
@@ -125,7 +128,7 @@ exports = module.exports = function (app) {
       .exec()
     res.send({constants})
   })
-  
+
   app.get('/api/v1/languages', async (req, res) => {
     const languages = await Language.model
       .find()
@@ -232,6 +235,16 @@ exports = module.exports = function (app) {
       .exec()
     res.send({
       partners
+    })
+  })
+
+  app.get('/api/v1/exchanges', async (req, res) => {
+    const exchanges = await Exchange.model
+      .find()
+      .sort(req.query.order || 'sortOrder')
+      .exec()
+    res.send({
+      exchanges
     })
   })
 
