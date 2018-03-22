@@ -14,6 +14,7 @@ const Member = keystone.list('Member')
 const Partner = keystone.list('Partner')
 const Exchange = keystone.list('Exchange')
 const Application = keystone.list('Application')
+const Report = keystone.list('Report')
 const Subscription = keystone.list('Subscription')
 const Header = keystone.list('Header')
 const Story = keystone.list('Story')
@@ -201,6 +202,17 @@ exports = module.exports = function (app) {
       email: body.email,
       phone: body.phone,
       job: body.job,
+      message: body.message
+    })
+    res.send(persisted)
+  })
+  
+  app.post('/api/v1/reports', async (req, res) => {
+    const body = req.body
+    const persisted = await Report.model.create({
+      name: body.name,
+      email: body.email,
+      phone: body.phone,
       message: body.message
     })
     res.send(persisted)
