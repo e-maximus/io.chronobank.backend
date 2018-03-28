@@ -17,9 +17,14 @@ Menu.add({
   icon32x32: { type: Types.CloudinaryImage },
   icon40x40: { type: Types.CloudinaryImage },
   children: { type: Types.Relationship, ref: 'Menu', many: true },
+  style: { type: Types.Select, options: [
+    { value: 'default', label: 'Default' },
+    { value: 'rounded', label: 'Rounded' }
+  ]},
 }, 'Display Options', {
   isVisibleInHeader: { type: Boolean, label: 'Show in the Header section' },
-  isVisibleInFooter: { type: Boolean, label: 'Show in the Footer section' }
+  isVisibleInFooter: { type: Boolean, label: 'Show in the Footer section' },
+  isVisibleInMobile: { type: Boolean, label: 'Show in the Mobile menu' }
 },
   'Internationalization',
   withTranslation.withAllTranslations({
