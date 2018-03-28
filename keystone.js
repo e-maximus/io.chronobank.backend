@@ -54,7 +54,7 @@ keystone.set('nav', {
   faq: ['faq-topics', 'faq-questions'],
   media: ['posts', 'post-categories', 'articles', 'galleries', 'gallery-images'],
   references: ['testimonials', 'partners', 'exchanges', 'members', 'jobs', 'constants', 'socials', 'files', 'papers'],
-  enquiries: ['enquiries', 'applications', 'subscriptions'],
+  enquiries: ['enquiries', 'applications', 'subscriptions', 'reports'],
   users: 'users',
 })
 
