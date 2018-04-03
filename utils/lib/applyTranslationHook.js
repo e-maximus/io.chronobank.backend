@@ -1,4 +1,4 @@
-const applyTranslationHook = (schema) => {
+const applyTranslationHook = (schema, additionalCallback = undefined) => {
 
   if (!schema) {
     return
@@ -13,6 +13,11 @@ const applyTranslationHook = (schema) => {
     }
     this.i18n = i18n
     this.i18nTranslations = Object.keys(i18n).join(', ')
+
+    if (typeof additionalCallback === 'function') {
+      additionalCallback(this)
+    }
+
     next()
   })
 

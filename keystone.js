@@ -52,6 +52,7 @@ keystone.set('nav', {
   general: ['stories', 'features', 'statistics', 'headers', 'iterations'],
   products: ['products', 'product-downloads', 'product-distros', 'product-features', 'product-descriptions'],
   faq: ['faq-topics', 'faq-questions'],
+  chronomint: ['mint-translations'],
   media: ['posts', 'post-categories', 'articles', 'galleries', 'gallery-images'],
   references: ['testimonials', 'partners', 'exchanges', 'members', 'jobs', 'constants', 'socials', 'files', 'papers'],
   enquiries: ['enquiries', 'applications', 'subscriptions'],
