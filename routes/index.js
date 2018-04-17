@@ -1,5 +1,7 @@
 const keystone = require('keystone')
 const config = require('config')
+const _ = require('lodash')
+const { parseJson } = require('../utils/lib/parseJson')
 const middleware = require('./middleware')
 const medium = require('./medium')
 const { Message, notifyAboutEnquiry } = require('../mail')
@@ -24,6 +26,7 @@ const FaqQuestion = keystone.list('FaqQuestion')
 const Menu = keystone.list('Menu')
 const Constant = keystone.list('Constant')
 const Title = keystone.list('Title')
+const MintTranslation = keystone.list('MintTranslation')
 
 const FaqQuestionIndex = require('../index/FaqQuestionIndex')
 
@@ -129,6 +132,75 @@ exports = module.exports = function (app) {
       .exec()
     res.send({constants})
   })
+
+
+  app.post('/api/v1/mintTranslations/import', async (req, res) => {
+
+    if (!req.body) {
+      res.status(400).send({ error: 'No body found! It has to be a json raw body.'})
+    }
+
+    const updateResult = await MintTranslation.model.update({ path: { $ne: '' } }, {isActive: false}, { multi: true })
+    const languagesJson = Object.entries(req.body)
+
+    languagesJson.forEach(([languageKey, languageData]) => {
+      const preparedData = parseJson(languageData)
+
+      preparedData.forEach((translation) => {
+        const i18nObj = {}
+        i18nObj[languageKey] = {active: true, overrides: {value: translation.translation}}
+
+        const result = MintTranslation.model.findOneAndUpdate(
+          { path: translation.path },
+          {...translation, isActive: true, i18n: i18nObj},
+          { upsert: true },
+          (err) => {}
+        )
+      })
+    })
+
+    res.send({ result: 'ok' })
+  })
+
+
+  app.get('/api/v1/mintTranslations/', async (req, res) => {
+
+    let result = {}
+    let languages = await Language.model
+      .find()
+      .where('isEnable', true)
+      .exec()
+
+    if (!languages) {
+      res.status(400).send({error: 'no languages found'})
+    }
+
+    languages.map((e) => {
+      result[e.key] = {}
+    })
+
+    const translation = await MintTranslation.model
+      .find()
+      .where({ i18nTranslations: { $ne: '' }, isActive: { $eq: true }  })
+      .exec()
+
+    if (!translation) {
+      res.status(400).send({error: 'no translations found'})
+    }
+
+    translation.forEach((transValue, transKey) => {
+        if (transValue.i18n) {
+          for (const [language, value] of Object.entries(transValue.i18n)) {
+            if (value && value.active) {
+              _.set(result[language], transValue.path, value['overrides']['value'])
+            }
+          }
+        }
+    })
+
+    res.send(result)
+  })
+
 
   app.get('/api/v1/languages', async (req, res) => {
     const languages = await Language.model
