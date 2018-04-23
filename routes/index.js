@@ -204,6 +204,9 @@ exports = module.exports = function (app) {
         if (transValue.i18n) {
           for (const [language, value] of Object.entries(transValue.i18n)) {
             if (value && value.active) {
+              if (typeof result[language] !== 'object') {
+                result[language] = {}
+              }
               _.set(result[language], transValue.path, value['overrides']['value'])
             }
           }
