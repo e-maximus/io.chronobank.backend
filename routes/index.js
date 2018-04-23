@@ -146,8 +146,20 @@ exports = module.exports = function (app) {
     languagesJson.forEach(([languageKey, languageData]) => {
       const preparedData = parseJson(languageData)
 
-      preparedData.forEach((translation) => {
-        const i18nObj = {}
+      preparedData.forEach(async (translation) => {
+        let i18nObj = {}
+        let translationCurrent = null
+
+        try {
+          translationCurrent = await MintTranslation.model
+          .findOne()
+          .where({ path: { $eq: translation.path }  })
+          .exec()
+        } catch (error) {}
+
+        if (translationCurrent) {
+          i18nObj = translationCurrent.i18n
+        }
         i18nObj[languageKey] = {active: true, overrides: {value: translation.translation}}
 
         const result = MintTranslation.model.findOneAndUpdate(
