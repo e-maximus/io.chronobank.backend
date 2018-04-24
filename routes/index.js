@@ -133,14 +133,16 @@ exports = module.exports = function (app) {
     res.send({constants})
   })
 
-
   app.post('/api/v1/mintTranslations/import', async (req, res) => {
 
     if (!req.body) {
       res.status(400).send({ error: 'No body found! It has to be a json raw body.'})
     }
 
-    const updateResult = await MintTranslation.model.update({ path: { $ne: '' } }, {isActive: false}, { multi: true })
+    const updateResult = await MintTranslation.model.update(
+        { $and: [{ path: { $ne: '' } }, { isActive: { $eq: true } }]},
+        {isActive: false, updatedAt: new Date()},
+        { multi: true })
     const languagesJson = Object.entries(req.body)
 
     languagesJson.forEach(([languageKey, languageData]) => {
@@ -162,9 +164,16 @@ exports = module.exports = function (app) {
         }
         i18nObj[languageKey] = {active: true, overrides: {value: translation.translation}}
 
+        let i18nTranslationsArray = []
+        for (const [language, value] of Object.entries(i18nObj.toJSON())) {
+          if (value && value.active) {
+            i18nTranslationsArray.push(language)
+          }
+        }
+
         const result = MintTranslation.model.findOneAndUpdate(
           { path: translation.path },
-          {...translation, isActive: true, i18n: i18nObj},
+          {...translation, i18nTranslations: i18nTranslationsArray.join(', '), isActive: true, i18n: i18nObj},
           { upsert: true },
           (err) => {}
         )
