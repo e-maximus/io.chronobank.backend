@@ -196,8 +196,10 @@ exports = module.exports = function (app) {
       res.status(400).send({error: 'no languages found'})
     }
 
+    let languagesArray = []
     languages.map((e) => {
       result[e.key] = {}
+      languagesArray.push(e.key)
     })
 
     const translation = await MintTranslation.model
@@ -221,6 +223,12 @@ exports = module.exports = function (app) {
           }
         }
     })
+
+    for (const [language, ] of Object.entries(result)) {
+      if (!languagesArray.includes(language)) {
+        unset(result[language])
+      }
+    }
 
     res.send(result)
   })
