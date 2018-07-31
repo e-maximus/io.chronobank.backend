@@ -214,18 +214,12 @@ exports = module.exports = function (app) {
     translation.forEach((transValue, transKey) => {
         if (transValue.i18n) {
           for (const [language, value] of Object.entries(transValue.i18n)) {
-            if (value && value.active) {
+            if (value && value.active && languagesArray.includes(language)) {
               _.set(result[language], transValue.path, value['overrides']['value'])
             }
           }
         }
     })
-
-    for (const [language, ] of Object.entries(result)) {
-      if (!languagesArray.includes(language)) {
-        unset(result[language])
-      }
-    }
 
     res.send(result)
   })
